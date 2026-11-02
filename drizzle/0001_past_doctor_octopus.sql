@@ -1,0 +1,2 @@
+ALTER TABLE "quotations" ADD COLUMN "revision_of" text;--> statement-breakpoint
+ALTER TABLE "quotations" ADD CONSTRAINT "quotations_revision_of_quotations_id_fk" FOREIGN KEY ("revision_of") REFERENCES "public"."quotations"("id") ON DELETE set null ON UPDATE no action;

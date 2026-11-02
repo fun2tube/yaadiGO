@@ -1,0 +1,250 @@
+[
+  {
+    "name": "QA Fix Check",
+    "phone": "9000000009",
+    "email": null,
+    "destination": "Kashmir Valley Escape",
+    "dates": "9–15 Nov 2026",
+    "groupSize": 2,
+    "budget": null,
+    "interests": [],
+    "company": null,
+    "role": null,
+    "monthlyTrips": null,
+    "message": "BOOKING REQUEST — Kashmir Valley Escape\r\nDeparture: 9–15 Nov 2026 (kve-1109)\r\nSharing: Triple sharing\r\nJoining from: Srinagar\r\nTravellers: 2\r\nPer person: ₹27,000\r\nTotal: ₹54,000\r\nAdvance due: ₹10,000\r\nSeats left on batch at request time: 12",
+    "itinerary": null,
+    "source": "fixed-departure-booking",
+    "receivedAt": "2026-10-14T14:59:36.853Z",
+    "status": "won",
+    "ownerId": "user_7fdecadb-28d",
+    "notes": [],
+    "lostReason": null,
+    "followUpAt": "2026-10-14T14:59:36.872Z",
+    "convertedAt": "2026-10-14T15:08:56.796Z",
+    "value": 192780,
+    "id": "lead_41b6cea9-c3e",
+    "createdAt": "2026-10-14T14:59:36.880Z",
+    "updatedAt": "2026-10-14T15:08:56.803Z",
+    "departureDate": "2026-11-09",
+    "adults": 2,
+    "bookingId": "book_65f6b47c-8f7"
+  },
+  {
+    "name": "QA Test Contact",
+    "phone": "9000000003",
+    "email": null,
+    "destination": "Vietnam",
+    "dates": null,
+    "groupSize": 2,
+    "budget": "₹25,000 – ₹50,000",
+    "interests": [],
+    "company": null,
+    "role": null,
+    "monthlyTrips": null,
+    "message": null,
+    "itinerary": null,
+    "source": "contact-page",
+    "receivedAt": "2026-10-14T13:45:18.461Z",
+    "status": "quoted",
+    "ownerId": "user_qatestadmin",
+    "notes": [],
+    "lostReason": null,
+    "followUpAt": "2026-10-14T13:45:18.468Z",
+    "convertedAt": null,
+    "value": 75000,
+    "id": "lead_940acbbe-8eb",
+    "createdAt": "2026-10-14T13:45:18.470Z",
+    "updatedAt": "2026-10-14T15:47:48.598Z",
+    "departureDate": "2026-10-22",
+    "returnDate": "2026-10-29",
+    "departureFlexible": true,
+    "adults": 3,
+    "infants": 2,
+    "children": [],
+    "budgetAmount": 35000,
+    "budgetPerPerson": true,
+    "brief": {
+      "hotelCategory": null,
+      "mealPlan": null,
+      "transportModes": [
+        "car",
+        "flight"
+      ],
+      "rooms": [
+        {
+          "roomClass": "standard",
+          "occupancy": "double",
+          "extraMattress": 0,
+          "count": 1
+        }
+      ],
+      "stays": [],
+      "legs": [],
+      "specialRequests": ""
+    }
+  },
+  {
+    "name": "QA Test Seat Hold",
+    "phone": "9000000002",
+    "email": null,
+    "destination": "Kashmir Valley Escape",
+    "dates": "9–15 Nov 2026",
+    "groupSize": 2,
+    "budget": null,
+    "interests": [],
+    "company": null,
+    "role": null,
+    "monthlyTrips": null,
+    "message": "BOOKING REQUEST — Kashmir Valley Escape\r\nDeparture: 9–15 Nov 2026 (kve-1109)\r\nSharing: Triple sharing\r\nJoining from: Srinagar\r\nTravellers: 2\r\nPer person: ₹27,000\r\nTotal: ₹54,000\r\nAdvance due: ₹10,000\r\nSeats left on batch at request time: 14",
+    "itinerary": null,
+    "source": "fixed-departure-booking",
+    "receivedAt": "2026-10-14T13:44:44.196Z",
+    "status": "won",
+    "ownerId": "user_qatestadmin",
+    "notes": [
+      {
+        "body": "QA: called, confirmed Nov batch",
+        "at": "2026-10-14T13:48:22.960Z",
+        "byId": "user_qatestadmin",
+        "byName": "QA Test Admin"
+      }
+    ],
+    "lostReason": null,
+    "followUpAt": "2026-10-14",
+    "convertedAt": "2026-10-14T13:51:18.550Z",
+    "value": 64155,
+    "id": "lead_94a0dd87-4af",
+    "createdAt": "2026-10-14T13:44:44.209Z",
+    "updatedAt": "2026-10-14T13:51:18.552Z",
+    "bookingId": "book_1368859d-08f"
+  },
+  {
+    "name": "QA Test Planner Lead",
+    "phone": "9000000001",
+    "email": "qa-lead@example.test",
+    "destination": "Manali",
+    "dates": "Not fixed yet",
+    "groupSize": 2,
+    "budget": null,
+    "interests": [],
+    "company": null,
+    "role": null,
+    "monthlyTrips": null,
+    "message": "AI planner itinerary: Mountain Culture and Valleys of the Beas\r\n6 days in Manali\r\n2 travelling (Couple)\r\nBudget band: ₹25,000 – ₹50,000 · Pace: Balanced",
+    "itinerary": {
+      "title": "Mountain Culture and Valleys of the Beas",
+      "destination": "Manali",
+      "durationDays": 6,
+      "estimatedCostPerPerson": {
+        "currency": "INR",
+        "min": 32000,
+        "max": 48000,
+        "note": "Covers private SUV transfers from Chandigarh, mid-range boutique stays, breakfast, and local guide fees. It excludes flights and the Rohtang Pass permit fee which varies by season."
+      },
+      "days": [
+        {
+          "day": 1,
+          "title": "The drive from Chandigarh to the mountains",
+          "location": "Manali",
+          "morning": "Start the journey from Chandigarh airport or station in a private SUV. The road passes through the plains of Punjab before climbing into the Shivalik hills.",
+          "afternoon": "Continue the drive along the Beas river through the Aut tunnel and past the Pandoh Dam. This is a long transit day with several mountain bends.",
+          "evening": "Check into a riverside property in the log-hut area or near the Beas. Have a quiet dinner at the stay to acclimatise to the 2,050-metre altitude.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Stop for parathas and curd at a roadside dhaba near Bilaspur.",
+          "travelTime": "8 to 9 hours by private SUV",
+          "tips": [
+            "Keep motion sickness medication handy for the winding roads after Kiratpur.",
+            "The Aut tunnel can have heavy traffic; expect delays."
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Old Manali lanes and Hadimba Temple",
+          "location": "Manali",
+          "morning": "Walk through the cedar forests to reach the 16th-century Hadimba Devi Temple. Observe the intricate wood carvings and the surrounding Dhungri Van Vihar park.",
+          "afternoon": "Cross the bridge into Old Manali to explore the narrow lanes lined with cafes and small shops. Visit the Manu Temple at the highest point of the village.",
+          "evening": "Spend time by the Manalsu River or browse the local silver and hemp shops in the old village.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Try trout fish prepared in the local style or wood-fired pizzas in Old Manali cafes.",
+          "travelTime": "No long transfers",
+          "tips": [
+            "Wear comfortable walking shoes with good grip for the steep Old Manali incline.",
+            "Visit the temple early to avoid the mid-day tourist bus crowds."
+          ]
+        },
+        {
+          "day": 3,
+          "title": "High altitude views at Solang or Rohtang",
+          "location": "Manali",
+          "morning": "Drive towards Solang Valley for views of the glaciers and snow-capped peaks. If the pass is open and permits are secured, continue toward Rohtang Pass.",
+          "afternoon": "Spend time at the Solang ropeway or take a short hike to the Anjani Mahadev waterfall. The terrain here is rocky and can be windy.",
+          "evening": "Return to the main town and walk through the Tibetan Monastery on Mall Road. Observe the local artisans making traditional carpets.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Look for Siddu, a traditional steamed bread filled with walnuts and spices, sold by local vendors.",
+          "travelTime": "2 to 4 hours round trip depending on traffic and snow conditions",
+          "tips": [
+            "Rohtang permits must be booked online in advance and are limited.",
+            "Carry a heavy jacket even in summer as temperatures drop significantly at the pass."
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Art and heritage in Naggar village",
+          "location": "Manali",
+          "morning": "Drive 20km south to Naggar, the former capital of Kullu. Explore the Naggar Castle, a unique example of western Himalayan architecture using stone and wood.",
+          "afternoon": "Visit the Nicholas Roerich Art Gallery to see paintings of the Himalayas. Walk down to the Tripura Sundari temple, a multi-tiered pagoda-style structure.",
+          "evening": "Enjoy the sunset from the castle balcony overlooking the Kullu valley before heading back to Manali.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Have lunch at a heritage cafe in Naggar featuring local fruit preserves and honey.",
+          "travelTime": "2 hours round trip by private car",
+          "tips": [
+            "The Naggar Castle is a great spot for photography without the usual Manali crowds.",
+            "Check for local festivals at the Tripura Sundari temple which often feature traditional dance."
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Riverside walks and local markets",
+          "location": "Manali",
+          "morning": "Take a relaxed walk through the Nature Park between Old and New Manali, where deodar trees shade the path along the Beas river.",
+          "afternoon": "Visit the local market near the bus stand for Kullu shawls and dry fruits. This is a good time to visit the less-frequented Vashisht village for the hot springs.",
+          "evening": "Have a final mountain dinner in one of the garden restaurants in the lower Manali area.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Sample different varieties of local apples or apricot jam from the government outlet.",
+          "travelTime": "No long transfers",
+          "tips": [
+            "Be wary of 'pure saffron' sold on the streets; it is often fake.",
+            "The Vashisht hot springs have separate areas for men and women."
+          ]
+        },
+        {
+          "day": 6,
+          "title": "Descent to the plains",
+          "location": "Chandigarh",
+          "morning": "Begin the long drive back down to Chandigarh. Ensure an early start to account for potential roadwork or truck traffic in the Mandi district.",
+          "afternoon": "Stop for lunch near Sundernagar. The landscape transitions from pine forests back to the broad-leafed trees of the lower hills.",
+          "evening": "Arrive in Chandigarh by late evening for your flight or train.",
+          "stay": "Not applicable",
+          "meals": "North Indian lunch at a highway rest stop.",
+          "travelTime": "8 to 9 hours by private SUV",
+          "tips": [
+            "Book a flight departing after 8:00 PM to ensure you have enough buffer for the drive.",
+            "Keep a small bag with essentials for the car journey as the main luggage stays in the boot."
+          ]
+        }
+      ]
+    },
+    "source": "ai-planner",
+    "receivedAt": "2026-10-14T13:41:01.887Z",
+    "status": "new",
+    "ownerId": "user_qatestadmin",
+    "notes": [],
+    "lostReason": null,
+    "followUpAt": "2026-10-14T13:41:01.893Z",
+    "convertedAt": null,
+    "value": null,
+    "id": "lead_4dbd4960-bda",
+    "createdAt": "2026-10-14T13:41:01.898Z",
+    "updatedAt": "2026-10-14T13:41:01.898Z"
+  }
+]

@@ -1,0 +1,539 @@
+@import "tailwindcss";
+
+@theme {
+  /* ---------------------------------------------------------------------
+   * Palette — research-lab
+   *
+   * Taken from how AI labs present themselves: a warm bone ground rather
+   * than a blue-grey one, a warm near-black rather than #000, and exactly
+   * one accent — a clay/terracotta that reads as considered rather than
+   * "brand blue". No emerald, no slate, no violet, and no raw framework
+   * hexes, because those are what a template looks like.
+   *
+   * FLAT ONLY. There is not one gradient in this stylesheet or anywhere in
+   * the components. Depth comes from value steps and hairline borders.
+   *
+   * These are SEMANTIC names. Components use bg-ink, text-accent-deep,
+   * border-paper-line — so the whole site re-themes from this block.
+   * ------------------------------------------------------------------- */
+
+  /* Ground */
+  --color-ink: #1a1917;           /* warm near-black — dark sections, footer */
+  --color-ink-soft: #262522;      /* raised surface on dark */
+  --color-ink-softer: #32302c;    /* hairline blocks, inset panels */
+  --color-paper: #f5f3ee;         /* warm bone */
+  --color-paper-dim: #edeae2;     /* alternating bands */
+  --color-card: #fdfcfa;
+
+  /* Clay — the only accent.
+     `accent` is the fill: 5.0:1 against white, so bold 14px button text
+     passes AA. `bright` is for strokes and marks on dark ink, where the
+     fill colour goes muddy. `deep` is accent text on paper: 6.2:1. */
+  --color-accent: #b4512f;
+  --color-accent-bright: #d2724e;
+  --color-accent-deep: #93401f;
+  --color-accent-soft: #f2e4dd;
+
+  /* States. Muted on purpose — one loud colour per screen is the budget. */
+  --color-warn: #a87c2e;
+  --color-warn-soft: #f2e8d4;
+  --color-good: #4a7c59;
+  --color-danger: #a33a28;
+
+  /* Type on dark */
+  --color-ink-text: #f5f3ee;
+  --color-ink-text-muted: #bdb8ae;
+  --color-ink-text-faint: #8b857b;
+  --color-ink-line: rgb(245 243 238 / 0.11);
+  --color-ink-line-strong: rgb(245 243 238 / 0.24);
+
+  /* Type on paper */
+  --color-paper-text: #1a1917;
+  --color-paper-text-muted: #55514a;
+  --color-paper-text-faint: #8b857b;
+  --color-paper-line: rgb(26 25 23 / 0.1);
+  --color-paper-line-strong: rgb(26 25 23 / 0.16);
+
+  /* ---------------------------------------------------------------------
+   * Type
+   *
+   * Fraunces (variable soft-serif) carries display, Public Sans does the
+   * reading, and JetBrains Mono does the small uppercase labels. The mono
+   * eyebrow is the single strongest "this is a technical product" signal
+   * available, and it is what separates a lab site from a brochure.
+   * ------------------------------------------------------------------- */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+}
+
+/* The lab eyebrow: small, monospaced, letterspaced, quiet. Applied to the
+   little uppercase labels that sit above headings. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+::selection {
+  background: rgb(180 81 47 / 0.2);
+}
+
+/* --------------------------------------------------------------------------
+ * Motion
+ * ------------------------------------------------------------------------ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.75s var(--ease-out-soft),
+    transform 0.75s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Reveal variants — opt in with data-reveal="clip" | "zoom" | "left" |
+ * "right" | "img". Same one observer, same attribute flip; only the
+ * pre-reveal state differs. Kept on transform, opacity and clip-path so the
+ * compositor does the work. */
+/* The clip lives on the CHILD, never the observed element: Chrome's
+ * IntersectionObserver honours the target's own clip-path, so an element
+ * clipped to nothing never "intersects" and would never be revealed. */
+[data-reveal="clip"],
+[data-reveal="img"] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal="clip"] > * {
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(48px);
+  transition:
+    clip-path 1s var(--ease-out-soft),
+    transform 1s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="zoom"] {
+  transform: scale(0.88);
+}
+
+[data-reveal="left"] {
+  transform: translateX(-72px);
+}
+
+[data-reveal="right"] {
+  transform: translateX(72px);
+}
+
+[data-reveal="img"] > * {
+  clip-path: inset(14% 14% 14% 14% round 28px);
+  transform: scale(1.12);
+  transition:
+    clip-path 1.2s var(--ease-out-soft),
+    transform 1.6s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="clip"][data-revealed] > *,
+[data-reveal="img"][data-revealed] > * {
+  clip-path: inset(0 0 -0.2em 0);
+  transform: none;
+}
+
+/* Headline words rising out of a mask. A CSS animation rather than a JS one,
+ * so it runs from the server-rendered HTML with no hydration wait and still
+ * plays with JavaScript blocked. */
+@keyframes word-rise {
+  from {
+    transform: translateY(105%) rotate(4deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  /* Room for descenders, clawed back so line height is unchanged. */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  vertical-align: bottom;
+}
+
+.word-mask > span {
+  display: inline-block;
+  transform-origin: 0 100%;
+  animation: word-rise 1.1s var(--ease-out-soft) both;
+  animation-delay: calc(var(--w, 0) * 75ms + 200ms);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 1s var(--ease-out-soft) both;
+  animation-delay: var(--fade-delay, 0ms);
+}
+
+/* Route change: an ink curtain sweeps up while the new page rises in. See
+ * src/app/template.js. */
+@keyframes curtain-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes curtain-mark {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-curtain {
+  animation: curtain-up 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.1s both;
+}
+
+.animate-curtain-mark {
+  animation: curtain-mark 0.45s var(--ease-out-soft) both;
+}
+
+/* `backwards`, not `both`: once finished the wrapper must hold NO transform,
+ * or it becomes the containing block for every position:fixed child — the
+ * nav, the bottom bar — and they scroll away with the page. */
+.animate-page-in {
+  animation: page-in 0.9s var(--ease-out-soft) 0.15s backwards;
+}
+
+/* Slow push-in on the hero slides. Restarted per slide by remounting. */
+@keyframes ken-burns {
+  from {
+    transform: scale(1.18) translate3d(-1.5%, 1%, 0);
+  }
+  to {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 9s linear both;
+}
+
+/* The slide-timer bar under the hero caption. */
+@keyframes bar-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-bar-fill {
+  transform-origin: left;
+  animation: bar-fill var(--bar-duration, 7s) linear both;
+}
+
+/* Scroll cue — a line that drains downward on a loop. */
+@keyframes scroll-cue {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+.animate-scroll-cue {
+  animation: scroll-cue 2.2s var(--ease-out-soft) infinite;
+}
+
+/* Outlined display type for the velocity marquee. */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+}
+
+/* Reduced motion: strip MOVEMENT, keep feedback.
+ *
+ * The guidance is about vestibular triggers — travel, parallax, spin — not
+ * about removing every cue that something changed. Killing opacity too means
+ * a visitor with the OS setting on (or a laptop in battery saver, which
+ * forces it) sees a completely static page and assumes the site is broken. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal="clip"] > *,
+  [data-reveal="img"] > * {
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  [data-reveal] {
+    transition: opacity 0.2s linear;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Continuous horizontal scroll for the destinations ticker. The track holds
+   two copies of the list, so translating exactly -50% loops seamlessly. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 38s) linear infinite;
+}
+
+.marquee:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Underline that draws itself from the left on hover — a real element
+   scaling on one axis, so there is not a single gradient in this file. */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out-soft);
+  content: "";
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Flat loading placeholder — a value pulse rather than a sweeping sheen,
+   since the sheen was a gradient. */
+@keyframes placeholder-pulse {
+  0%,
+  100% {
+    background-color: var(--color-paper-dim);
+  }
+  50% {
+    background-color: rgb(26 25 23 / 0.09);
+  }
+}
+
+.skeleton {
+  background-color: var(--color-paper-dim);
+  animation: placeholder-pulse 1.8s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+ * Print — used by the AI planner's "Save as PDF".
+ * ------------------------------------------------------------------------ */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .print-block {
+    break-inside: avoid;
+    border-color: #d6d2c9 !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * Reel mode — vertical swipe deck, applied to <html> by components/reel.js.
+ * Keeping the document as the scroll container preserves the sticky header,
+ * scroll restoration, find-in-page and the iOS address-bar collapse.
+ * ------------------------------------------------------------------------ */
+html[data-reel] {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+@media (min-height: 620px) and (pointer: coarse) {
+  html[data-reel] {
+    scroll-snap-type: y mandatory;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-reel] {
+    scroll-snap-type: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * Mobile bottom bar clearance
+ * ------------------------------------------------------------------------ */
+@media (max-width: 767px) {
+  /* Clears the 4.25rem tab bar AND the floating Yaadi pill that sits above
+     it — without the extra room the pill covers whatever interactive element
+     happens to be last on the page. */
+  body {
+    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom));
+  }
+
+  html[data-reel] body {
+    padding-bottom: 0;
+  }
+
+  html[data-reel] [data-panel] {
+    min-height: calc(100dvh - 4.25rem - env(safe-area-inset-bottom));
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print — a quotation the customer saves as a PDF.
+   
+   No PDF library: the browser's own print-to-PDF produces a real, selectable,
+   searchable document with correct Indian typography, at zero dependency cost
+   and zero serverless cold-start penalty. What it needs is a stylesheet that
+   removes the chrome and stops content splitting across pages badly.
+--------------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 14mm;
+  }
+
+  .no-print,
+  [data-print] {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    /* The site's reel-snap and bottom padding make no sense on paper. */
+    scroll-snap-type: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* A line item split across a page break is unreadable and looks careless. */
+  section,
+  dl,
+  li,
+  .rounded-xl,
+  .rounded-2xl {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2 {
+    break-after: avoid;
+  }
+
+  /* Backgrounds are dropped by default, which would erase the totals panel
+     and every status colour. */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Quotation templates in print.
+   
+   The Detailed template is the one that breaks badly by default: a twelve-day
+   itinerary splits a day card across a page boundary and reads as a printing
+   fault rather than a long document.
+--------------------------------------------------------------------------- */
+@media print {
+  .quote-doc section,
+  .quote-doc article,
+  .quote-doc dl {
+    break-inside: avoid;
+  }
+
+  /* A hero that fills the first page pushes the trip below the fold on paper,
+     where there is no scrolling to recover it. */
+  .quote-doc img {
+    max-height: 62mm;
+  }
+
+  .quote-detailed article img {
+    max-height: 48mm;
+  }
+
+  /* Simple is meant to be one page. Anything that would force a second is a
+     failure of the template, not of the printer. */
+  .quote-simple {
+    font-size: 0.96em;
+  }
+}

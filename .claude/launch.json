@@ -1,0 +1,86 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "yaadigo",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "dev",
+        "-p",
+        "3005"
+      ],
+      "port": 3005
+    },
+    {
+      "name": "yaadigo-local-store",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/dev-local-store.mjs"
+      ],
+      "port": 3006
+    },
+    {
+      "name": "yaadigo-prod",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "node_modules/next/dist/bin/next",
+        "start",
+        "-p",
+        "3007"
+      ],
+      "port": 3007
+    },
+    {
+      "name": "yaadigo-local-store-gst",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/dev-local-store.mjs",
+        "3006"
+      ],
+      "port": 3006,
+      "env": {
+        "COMPANY_GSTIN": "07AAACY1234A1Z5"
+      }
+    },
+    {
+      "name": "easyshopy-api",
+      "runtimeExecutable": "C:/Users/user/Downloads/commerce-agents-easyshopy/commerce-agents-easyshopy/.venv/Scripts/python.exe",
+      "runtimeArgs": [
+        "-m",
+        "uvicorn",
+        "easyshopy.api.main:app",
+        "--app-dir",
+        "C:/Users/user/Downloads/commerce-agents-easyshopy/commerce-agents-easyshopy/examples",
+        "--port",
+        "8004"
+      ],
+      "port": 8004,
+      "url": "http://localhost:8004"
+    },
+    {
+      "name": "easyshopy-storefront",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/user/Downloads/commerce-agents-easyshopy/commerce-agents-easyshopy/examples/node_modules/next/dist/bin/next",
+        "dev",
+        "C:/Users/user/Downloads/commerce-agents-easyshopy/commerce-agents-easyshopy/examples/easyshopy/storefront-web",
+        "--port",
+        "3004"
+      ],
+      "port": 3004
+    },
+    {
+      "name": "easyshopy-portal",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/user/Downloads/commerce-agents-easyshopy/commerce-agents-easyshopy/examples/node_modules/next/dist/bin/next",
+        "dev",
+        "C:/Users/user/Downloads/commerce-agents-easyshopy/commerce-agents-easyshopy/examples/easyshopy/merchant-web",
+        "--port",
+        "3104"
+      ],
+      "port": 3104
+    }
+  ]
+}

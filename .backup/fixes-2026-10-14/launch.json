@@ -1,0 +1,35 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "yaadigo",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "dev",
+        "-p",
+        "3005"
+      ],
+      "port": 3005
+    },
+    {
+      "name": "yaadigo-local-store",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "scripts/dev-local-store.mjs"
+      ],
+      "port": 3006
+    },
+    {
+      "name": "yaadigo-prod",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "node_modules/next/dist/bin/next",
+        "start",
+        "-p",
+        "3007"
+      ],
+      "port": 3007
+    }
+  ]
+}

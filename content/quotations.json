@@ -1,0 +1,740 @@
+[
+  {
+    "leadId": "lead_4dbd4960-bda",
+    "version": 1,
+    "status": "draft",
+    "title": "QA draft preview check",
+    "destination": "Manali",
+    "durationDays": 4,
+    "startDate": null,
+    "summary": null,
+    "itinerary": {
+      "title": "Mountain Culture and Valleys of the Beas",
+      "destination": "Manali",
+      "durationDays": 6,
+      "estimatedCostPerPerson": {
+        "currency": "INR",
+        "min": 32000,
+        "max": 48000,
+        "note": "Covers private SUV transfers from Chandigarh, mid-range boutique stays, breakfast, and local guide fees. It excludes flights and the Rohtang Pass permit fee which varies by season."
+      },
+      "days": [
+        {
+          "day": 1,
+          "title": "The drive from Chandigarh to the mountains",
+          "location": "Manali",
+          "morning": "Start the journey from Chandigarh airport or station in a private SUV. The road passes through the plains of Punjab before climbing into the Shivalik hills.",
+          "afternoon": "Continue the drive along the Beas river through the Aut tunnel and past the Pandoh Dam. This is a long transit day with several mountain bends.",
+          "evening": "Check into a riverside property in the log-hut area or near the Beas. Have a quiet dinner at the stay to acclimatise to the 2,050-metre altitude.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Stop for parathas and curd at a roadside dhaba near Bilaspur.",
+          "travelTime": "8 to 9 hours by private SUV",
+          "tips": [
+            "Keep motion sickness medication handy for the winding roads after Kiratpur.",
+            "The Aut tunnel can have heavy traffic; expect delays."
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Old Manali lanes and Hadimba Temple",
+          "location": "Manali",
+          "morning": "Walk through the cedar forests to reach the 16th-century Hadimba Devi Temple. Observe the intricate wood carvings and the surrounding Dhungri Van Vihar park.",
+          "afternoon": "Cross the bridge into Old Manali to explore the narrow lanes lined with cafes and small shops. Visit the Manu Temple at the highest point of the village.",
+          "evening": "Spend time by the Manalsu River or browse the local silver and hemp shops in the old village.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Try trout fish prepared in the local style or wood-fired pizzas in Old Manali cafes.",
+          "travelTime": "No long transfers",
+          "tips": [
+            "Wear comfortable walking shoes with good grip for the steep Old Manali incline.",
+            "Visit the temple early to avoid the mid-day tourist bus crowds."
+          ]
+        },
+        {
+          "day": 3,
+          "title": "High altitude views at Solang or Rohtang",
+          "location": "Manali",
+          "morning": "Drive towards Solang Valley for views of the glaciers and snow-capped peaks. If the pass is open and permits are secured, continue toward Rohtang Pass.",
+          "afternoon": "Spend time at the Solang ropeway or take a short hike to the Anjani Mahadev waterfall. The terrain here is rocky and can be windy.",
+          "evening": "Return to the main town and walk through the Tibetan Monastery on Mall Road. Observe the local artisans making traditional carpets.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Look for Siddu, a traditional steamed bread filled with walnuts and spices, sold by local vendors.",
+          "travelTime": "2 to 4 hours round trip depending on traffic and snow conditions",
+          "tips": [
+            "Rohtang permits must be booked online in advance and are limited.",
+            "Carry a heavy jacket even in summer as temperatures drop significantly at the pass."
+          ]
+        },
+        {
+          "day": 4,
+          "title": "Art and heritage in Naggar village",
+          "location": "Manali",
+          "morning": "Drive 20km south to Naggar, the former capital of Kullu. Explore the Naggar Castle, a unique example of western Himalayan architecture using stone and wood.",
+          "afternoon": "Visit the Nicholas Roerich Art Gallery to see paintings of the Himalayas. Walk down to the Tripura Sundari temple, a multi-tiered pagoda-style structure.",
+          "evening": "Enjoy the sunset from the castle balcony overlooking the Kullu valley before heading back to Manali.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Have lunch at a heritage cafe in Naggar featuring local fruit preserves and honey.",
+          "travelTime": "2 hours round trip by private car",
+          "tips": [
+            "The Naggar Castle is a great spot for photography without the usual Manali crowds.",
+            "Check for local festivals at the Tripura Sundari temple which often feature traditional dance."
+          ]
+        },
+        {
+          "day": 5,
+          "title": "Riverside walks and local markets",
+          "location": "Manali",
+          "morning": "Take a relaxed walk through the Nature Park between Old and New Manali, where deodar trees shade the path along the Beas river.",
+          "afternoon": "Visit the local market near the bus stand for Kullu shawls and dry fruits. This is a good time to visit the less-frequented Vashisht village for the hot springs.",
+          "evening": "Have a final mountain dinner in one of the garden restaurants in the lower Manali area.",
+          "stay": "Riverside boutique resort or wooden cottage in the Log Hut area",
+          "meals": "Sample different varieties of local apples or apricot jam from the government outlet.",
+          "travelTime": "No long transfers",
+          "tips": [
+            "Be wary of 'pure saffron' sold on the streets; it is often fake.",
+            "The Vashisht hot springs have separate areas for men and women."
+          ]
+        },
+        {
+          "day": 6,
+          "title": "Descent to the plains",
+          "location": "Chandigarh",
+          "morning": "Begin the long drive back down to Chandigarh. Ensure an early start to account for potential roadwork or truck traffic in the Mandi district.",
+          "afternoon": "Stop for lunch near Sundernagar. The landscape transitions from pine forests back to the broad-leafed trees of the lower hills.",
+          "evening": "Arrive in Chandigarh by late evening for your flight or train.",
+          "stay": "Not applicable",
+          "meals": "North Indian lunch at a highway rest stop.",
+          "travelTime": "8 to 9 hours by private SUV",
+          "tips": [
+            "Book a flight departing after 8:00 PM to ensure you have enough buffer for the drive.",
+            "Keep a small bag with essentials for the car journey as the main luggage stays in the boot."
+          ]
+        }
+      ]
+    },
+    "inclusions": [],
+    "exclusions": [],
+    "terms": null,
+    "content": null,
+    "currency": "INR",
+    "lines": [
+      {
+        "kind": "hotel",
+        "label": "Hotel",
+        "quantity": 1,
+        "unitPrice": 10000,
+        "perPerson": true,
+        "unitCost": 0,
+        "amount": 20000,
+        "costAmount": 0
+      }
+    ],
+    "travellers": 2,
+    "subtotal": 20000,
+    "cost": 0,
+    "discount": 0,
+    "taxPercent": 5,
+    "tax": 1000,
+    "total": 21000,
+    "grossMargin": null,
+    "marginPercent": null,
+    "perPerson": 10500,
+    "ownerId": "user_qatestadmin",
+    "createdById": "user_qatestadmin",
+    "createdByName": "QA Test Admin",
+    "token": "D2VUzNiTxWEsMV8Df-3cJ43M",
+    "sentAt": null,
+    "decidedAt": null,
+    "validUntil": null,
+    "id": "quot_0ca761a8-fea",
+    "createdAt": "2026-10-14T16:22:44.224Z",
+    "updatedAt": "2026-10-14T16:22:44.224Z"
+  },
+  {
+    "leadId": "lead_940acbbe-8eb",
+    "version": 1,
+    "status": "sent",
+    "title": "Classic Vietnam: North to South",
+    "destination": "Vietnam",
+    "durationDays": 8,
+    "startDate": null,
+    "summary": "An 8-day private journey through the cultural highlights of Hanoi, the limestone bays of Ha Long, the historic streets of Hoi An, and the energy of Ho Chi Minh City.",
+    "itinerary": null,
+    "inclusions": [
+      "6 nights accommodation in 3-star hotels with breakfast",
+      "1 night accommodation on a Ha Long Bay cruise with all meals included",
+      "Internal domestic flights (Hanoi to Da Nang, Da Nang to HCMC)",
+      "Private airport transfers and ground transportation",
+      "English-speaking local guides for scheduled tours",
+      "Monument entry fees and boat tickets per itinerary",
+      "Vietnam E-Visa processing fees"
+    ],
+    "exclusions": [
+      "International flights from India to Vietnam",
+      "Lunches and dinners in city hotels",
+      "Travel insurance",
+      "Early check-in and late check-out",
+      "Personal expenses and tipping"
+    ],
+    "terms": null,
+    "content": {
+      "template": "modern",
+      "overview": "Vietnam · 8 days · 3 travellers. Everything below is arranged by us — stays, transport and the day-by-day. Tell us what to change and we will rebuild it around your dates.",
+      "heroImageId": "hero-himalaya-hikers",
+      "hotels": [
+        {
+          "imageUrl": "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI="
+        }
+      ],
+      "flights": [
+        {
+          "imageUrl": "https://www.shutterstock.com/image-vector/boarding-pass-flight-ticket-template-260nw-2632412057.jpg"
+        }
+      ],
+      "paymentSchedule": [
+        {
+          "label": "Advance to confirm your booking",
+          "amountPerPerson": 5000,
+          "when": "On acceptance"
+        },
+        {
+          "label": "50% of the package",
+          "percent": 50,
+          "when": "One month before departure"
+        },
+        {
+          "label": "Balance",
+          "remainder": true,
+          "when": "Seven days before departure"
+        }
+      ],
+      "howToBook": [
+        "Tell us you are happy with this plan — reply here, or approve it at the link above.",
+        "We confirm availability with the hotels and transport on your dates.",
+        "Pay the advance below. Your booking is confirmed once we receive it.",
+        "Vouchers, tickets and driver details reach you seven days before departure."
+      ],
+      "cancellation": [
+        {
+          "window": "More than 30 days before departure",
+          "charge": "70% of the package rate"
+        },
+        {
+          "window": "29 to 8 days before departure",
+          "charge": "50% of the package rate"
+        },
+        {
+          "window": "Less than 7 days, or no-show",
+          "charge": "No refund"
+        },
+        {
+          "window": "The advance booking amount",
+          "charge": "Not refundable"
+        },
+        {
+          "window": "Flights",
+          "charge": "As per the airline's own policy"
+        }
+      ],
+      "paymentOptions": [
+        {
+          "label": "Bank transfer",
+          "lines": [
+            "Yaadigo Networks Pvt Ltd",
+            "Account 201003067339 · Current",
+            "IFSC INDB0000370 · Nehru Place"
+          ]
+        },
+        {
+          "label": "Payment link",
+          "lines": [
+            "We send a secure link.",
+            "A 2.5% gateway charge applies."
+          ]
+        },
+        {
+          "label": "Google Pay",
+          "lines": [
+            "73-73-73-4778"
+          ]
+        }
+      ],
+      "thingsToCarry": [
+        "Backpack or cabin bag",
+        "Photo ID (original)",
+        "Personal medication",
+        "Weather-appropriate clothing",
+        "Comfortable walking shoes",
+        "Sunglasses and sunscreen",
+        "Power bank and charger",
+        "Cash for small purchases"
+      ],
+      "stayPhotos": [],
+      "transportPhotos": [],
+      "routeMapId": null,
+      "routeMapUrl": null,
+      "declaration": "By confirming this booking you accept these terms on behalf of everyone travelling on it.\n\nThis trip may visit remote or high-altitude areas where accommodation, transport, hygiene, medical facilities and connectivity are not of the standard found on a conventional holiday. You accept those conditions and confirm that everyone travelling is physically fit for the itinerary, and that any pre-existing medical condition has been declared to us at the time of booking.\n\nWhere activities are run by independent operators — adventure activities, optional excursions, local guides — YaadiGo Networks Pvt Ltd arranges them but does not control them, and is not responsible for their safety standards or their performance.\n\nThe itinerary may be changed, shortened or rerouted where weather, road conditions, permits or safety require it. We will always tell you and rebook what we can. Costs arising from events outside our reasonable control — weather, roadblocks, strikes, flight cancellations, civil disruption — are not refundable by us, though we will help you recover what is recoverable from airlines and insurers.\n\nTravel insurance is not included and is strongly recommended.\n\nOur tour leader's decision is final on any matter affecting the safety or wellbeing of the group. Behaviour that endangers, distresses or seriously inconveniences others may end that person's trip, without refund.\n\nCancellation charges are as set out above. The advance booking amount is not refundable.",
+      "termsList": [
+        "Prices hold until the validity date above and are subject to availability at the time of confirmation.",
+        "Hotels named are indicative. If one is unavailable we substitute a property of the same or better standard and tell you before confirming.",
+        "Airfare is not held until ticketed. A fare change between quotation and ticketing is passed on at cost, with your approval first.",
+        "Government taxes, fuel surcharges and entry fees are as applicable on the date of travel.",
+        "Please carry valid photo identification. International travel needs a passport valid for six months beyond your return date.",
+        "We are not liable for delays or changes caused by weather, roadblocks, strikes or other events outside our control, but we will always rebook what we can."
+      ]
+    },
+    "currency": "INR",
+    "lines": [
+      {
+        "kind": "hotel",
+        "label": "3-Star Hotel Stay (City Nights)",
+        "detail": "Standard rooms in Hanoi, Hoi An, and HCMC (6 nights total)",
+        "quantity": 6,
+        "unitPrice": 4200,
+        "unitCost": 3400,
+        "perPerson": true,
+        "confidence": "estimate",
+        "amount": 75600,
+        "costAmount": 61200
+      },
+      {
+        "kind": "other",
+        "label": "Ha Long Bay Cruise",
+        "detail": "Overnight stay on a shared 4-star vessel with all meals",
+        "quantity": 1,
+        "unitPrice": 12500,
+        "unitCost": 10500,
+        "perPerson": true,
+        "confidence": "estimate",
+        "amount": 37500,
+        "costAmount": 31500
+      },
+      {
+        "kind": "flight",
+        "label": "Domestic Flights",
+        "detail": "Hanoi to Da Nang and Da Nang to Ho Chi Minh City",
+        "quantity": 1,
+        "unitPrice": 11500,
+        "unitCost": 10000,
+        "perPerson": true,
+        "confidence": "estimate",
+        "amount": 34500,
+        "costAmount": 30000
+      },
+      {
+        "kind": "transport",
+        "label": "Private Ground Transfers",
+        "detail": "AC vehicle for airport transfers and city-to-city segments",
+        "quantity": 1,
+        "unitPrice": 18500,
+        "unitCost": 15500,
+        "perPerson": false,
+        "confidence": "known",
+        "amount": 18500,
+        "costAmount": 15500
+      },
+      {
+        "kind": "activity",
+        "label": "Sightseeing & Entry Fees",
+        "detail": "Cu Chi Tunnels, Hanoi city tour, Hoi An old town tickets",
+        "quantity": 1,
+        "unitPrice": 5200,
+        "unitCost": 4500,
+        "perPerson": true,
+        "confidence": "known",
+        "amount": 15600,
+        "costAmount": 13500
+      },
+      {
+        "kind": "guide",
+        "label": "English-Speaking Local Guides",
+        "detail": "Guided tours in each major city",
+        "quantity": 4,
+        "unitPrice": 3500,
+        "unitCost": 3000,
+        "perPerson": false,
+        "confidence": "known",
+        "amount": 14000,
+        "costAmount": 12000
+      },
+      {
+        "kind": "permit",
+        "label": "Vietnam E-Visa Processing",
+        "detail": "Standard single-entry visa for Indian passport holders",
+        "quantity": 1,
+        "unitPrice": 3200,
+        "unitCost": 2500,
+        "perPerson": true,
+        "confidence": "known",
+        "amount": 9600,
+        "costAmount": 7500
+      }
+    ],
+    "travellers": 3,
+    "subtotal": 205300,
+    "cost": 171200,
+    "discount": 0,
+    "taxPercent": 5,
+    "tax": 10265,
+    "total": 215565,
+    "grossMargin": 34100,
+    "marginPercent": 17,
+    "perPerson": 71855,
+    "ownerId": "user_qatestadmin",
+    "createdById": "user_qatestadmin",
+    "createdByName": "QA Test Admin",
+    "token": "VE5nGysjQgr9zynNMBewkkJo",
+    "sentAt": "2026-10-14T15:47:48.525Z",
+    "decidedAt": null,
+    "validUntil": null,
+    "id": "quot_c40b2e33-64e",
+    "createdAt": "2026-10-14T15:42:44.758Z",
+    "updatedAt": "2026-10-14T15:47:48.531Z"
+  },
+  {
+    "leadId": "lead_41b6cea9-c3e",
+    "version": 1,
+    "status": "approved",
+    "title": "Kashmir Valley Escape",
+    "destination": "Kashmir Valley Escape",
+    "durationDays": 7,
+    "startDate": null,
+    "summary": "A 7-day tour through Srinagar, Gulmarg, and Pahalgam with 6 nights of accommodation, daily breakfast and dinner, private transfers, and a Gondola Phase 1 ticket.",
+    "itinerary": null,
+    "inclusions": [
+      "6 nights accommodation (1 night houseboat, 5 nights hotels)",
+      "Breakfast and dinner daily at all properties",
+      "All transfers and sightseeing by private AC vehicle",
+      "Gulmarg Gondola Phase 1 ticket per person",
+      "One-hour Shikara ride on Dal Lake",
+      "All toll taxes, parking fees, and driver allowances"
+    ],
+    "exclusions": [
+      "Flights to and from Srinagar",
+      "Local union cabs in Pahalgam for Aru, Betaab, and Chandanwari valleys",
+      "Pony rides, sledging, or guide charges",
+      "Monument entry fees",
+      "Personal expenses, tips, and laundry",
+      "Travel insurance"
+    ],
+    "terms": null,
+    "content": {
+      "template": "detailed",
+      "overview": "Kashmir Valley Escape · 7 days · 2 travellers. Everything below is arranged by us — stays, transport and the day-by-day. Tell us what to change and we will rebuild it around your dates.",
+      "heroImageId": null,
+      "highlights": [],
+      "hotels": [
+        {
+          "imageId": null,
+          "imageUrl": "/api/media/file/2026/10/a7f369c8-0fbc-4304-927b-31901b43d9d6.jpg",
+          "imageAlt": "Qa houseboat room",
+          "name": "QA Dal Lake Houseboat",
+          "city": "Srinagar",
+          "nights": "1"
+        }
+      ],
+      "flights": [],
+      "paymentSchedule": [
+        {
+          "label": "Advance to confirm your booking",
+          "amountPerPerson": 5000,
+          "when": "On acceptance"
+        },
+        {
+          "label": "50% of the package",
+          "percent": 50,
+          "when": "One month before departure"
+        },
+        {
+          "label": "Balance",
+          "remainder": true,
+          "when": "Seven days before departure"
+        }
+      ],
+      "howToBook": [
+        "Tell us you are happy with this plan — reply here, or approve it at the link above.",
+        "We confirm availability with the hotels and transport on your dates.",
+        "Pay the advance below. Your booking is confirmed once we receive it.",
+        "Vouchers, tickets and driver details reach you seven days before departure."
+      ],
+      "cancellation": [
+        {
+          "window": "More than 30 days before departure",
+          "charge": "70% of the package rate"
+        },
+        {
+          "window": "29 to 8 days before departure",
+          "charge": "50% of the package rate"
+        },
+        {
+          "window": "Less than 7 days, or no-show",
+          "charge": "No refund"
+        },
+        {
+          "window": "The advance booking amount",
+          "charge": "Not refundable"
+        },
+        {
+          "window": "Flights",
+          "charge": "As per the airline's own policy"
+        }
+      ],
+      "paymentOptions": [
+        {
+          "label": "Bank transfer",
+          "lines": [
+            "Yaadigo Networks Pvt Ltd",
+            "Account 201003067339 · Current",
+            "IFSC INDB0000370 · Nehru Place"
+          ]
+        },
+        {
+          "label": "Payment link",
+          "lines": [
+            "We send a secure link.",
+            "A 2.5% gateway charge applies."
+          ]
+        },
+        {
+          "label": "Google Pay",
+          "lines": [
+            "73-73-73-4778"
+          ]
+        }
+      ],
+      "thingsToCarry": [
+        "Backpack",
+        "Photo ID (original)",
+        "Personal medication",
+        "Woollens and thermals",
+        "Gloves and a warm cap",
+        "Trek pants",
+        "Trekking boots",
+        "Extra socks",
+        "Sunglasses",
+        "Sunscreen",
+        "Power bank",
+        "LED torch",
+        "Cash — ATMs are scarce",
+        "Camera"
+      ],
+      "stayPhotos": [
+        {
+          "id": null,
+          "url": "/api/media/file/2026/10/676087fa-2a5a-4cac-a35f-fa28a353d2da.jpg",
+          "alt": "Qa gondola ride"
+        }
+      ],
+      "transportPhotos": [],
+      "routeMapId": null,
+      "routeMapUrl": null,
+      "declaration": "By confirming this booking you accept these terms on behalf of everyone travelling on it.\n\nThis trip may visit remote or high-altitude areas where accommodation, transport, hygiene, medical facilities and connectivity are not of the standard found on a conventional holiday. You accept those conditions and confirm that everyone travelling is physically fit for the itinerary, and that any pre-existing medical condition has been declared to us at the time of booking.\n\nWhere activities are run by independent operators — adventure activities, optional excursions, local guides — YaadiGo Networks Pvt Ltd arranges them but does not control them, and is not responsible for their safety standards or their performance.\n\nThe itinerary may be changed, shortened or rerouted where weather, road conditions, permits or safety require it. We will always tell you and rebook what we can. Costs arising from events outside our reasonable control — weather, roadblocks, strikes, flight cancellations, civil disruption — are not refundable by us, though we will help you recover what is recoverable from airlines and insurers.\n\nTravel insurance is not included and is strongly recommended.\n\nOur tour leader's decision is final on any matter affecting the safety or wellbeing of the group. Behaviour that endangers, distresses or seriously inconveniences others may end that person's trip, without refund.\n\nCancellation charges are as set out above. The advance booking amount is not refundable.",
+      "termsList": [
+        "Prices hold until the validity date above and are subject to availability at the time of confirmation.",
+        "Hotels named are indicative. If one is unavailable we substitute a property of the same or better standard and tell you before confirming.",
+        "Airfare is not held until ticketed. A fare change between quotation and ticketing is passed on at cost, with your approval first.",
+        "Government taxes, fuel surcharges and entry fees are as applicable on the date of travel.",
+        "Please carry valid photo identification. International travel needs a passport valid for six months beyond your return date.",
+        "We are not liable for delays or changes caused by weather, roadblocks, strikes or other events outside our control, but we will always rebook what we can."
+      ]
+    },
+    "currency": "INR",
+    "lines": [
+      {
+        "kind": "hotel",
+        "label": "Accommodation - 6 nights total",
+        "detail": "1 night in Srinagar houseboat, 2 nights in Gulmarg hotel, 2 nights in Pahalgam hotel, 1 night in Srinagar hotel on double occupancy with breakfast and dinner",
+        "quantity": 6,
+        "unitPrice": 13500,
+        "unitCost": 11000,
+        "perPerson": true,
+        "confidence": "estimate",
+        "amount": 162000,
+        "costAmount": 132000
+      },
+      {
+        "kind": "transport",
+        "label": "Private AC vehicle for transfers and sightseeing",
+        "detail": "Dedicated cab for airport transfers, intercity drives between Srinagar, Gulmarg, and Pahalgam, and local sightseeing",
+        "quantity": 1,
+        "unitPrice": 18000,
+        "unitCost": 14500,
+        "perPerson": false,
+        "confidence": "estimate",
+        "amount": 18000,
+        "costAmount": 14500
+      },
+      {
+        "kind": "activity",
+        "label": "Gondola Phase 1 ticket",
+        "detail": "Return ropeway ticket from Gulmarg base to Kongdoori",
+        "quantity": 1,
+        "unitPrice": 1000,
+        "unitCost": 850,
+        "perPerson": true,
+        "confidence": "known",
+        "amount": 2000,
+        "costAmount": 1700
+      },
+      {
+        "kind": "activity",
+        "label": "Shikara ride on Dal Lake",
+        "detail": "One-hour boat ride on Dal Lake in Srinagar",
+        "quantity": 1,
+        "unitPrice": 800,
+        "unitCost": 600,
+        "perPerson": true,
+        "confidence": "estimate",
+        "amount": 1600,
+        "costAmount": 1200
+      }
+    ],
+    "travellers": 2,
+    "subtotal": 183600,
+    "cost": 149400,
+    "discount": 0,
+    "taxPercent": 5,
+    "tax": 9180,
+    "total": 192780,
+    "grossMargin": 34200,
+    "marginPercent": 19,
+    "perPerson": 96390,
+    "ownerId": "user_7fdecadb-28d",
+    "createdById": "user_qatestadmin",
+    "createdByName": "QA Test Admin",
+    "token": "IYrL2eyjc9iZRxeuTduf-oAd",
+    "sentAt": "2026-10-14T15:08:31.886Z",
+    "decidedAt": "2026-10-14T15:08:56.730Z",
+    "validUntil": null,
+    "id": "quot_0335983c-f81",
+    "createdAt": "2026-10-14T15:08:28.616Z",
+    "updatedAt": "2026-10-14T16:21:17.457Z",
+    "decisionNote": null
+  },
+  {
+    "leadId": "lead_94a0dd87-4af",
+    "version": 1,
+    "status": "approved",
+    "title": "Kashmir Valley Escape: Srinagar, Pahalgam & Gulmarg",
+    "destination": "Kashmir Valley Escape",
+    "durationDays": 6,
+    "startDate": null,
+    "summary": "A 7-day winter-start circuit covering the core of the Kashmir Valley, including a stay on a Dal Lake houseboat and visits to the high meadows of Pahalgam and Gulmarg.",
+    "itinerary": null,
+    "inclusions": [
+      "1 Night stay in a Deluxe Houseboat",
+      "5 Nights stay in Standard hotels",
+      "Daily Breakfast and Dinner at all accommodations",
+      "Private vehicle for all airport transfers and inter-city travel",
+      "Gondola Phase 1 tickets for both travellers",
+      "Shikara ride on Dal Lake",
+      "Pahalgam union cab for local sightseeing",
+      "Driver allowance, tolls, and parking fees"
+    ],
+    "exclusions": [
+      "Flights to and from Srinagar",
+      "Lunches and snacks",
+      "Pony rides in Gulmarg or Pahalgam",
+      "Entry fees to Mughal Gardens (approx. INR 20-50 per head)",
+      "Travel insurance",
+      "Personal expenses like laundry or heater charges if applicable"
+    ],
+    "terms": null,
+    "content": null,
+    "currency": "INR",
+    "lines": [
+      {
+        "kind": "hotel",
+        "label": "Traditional Houseboat Stay",
+        "detail": "1 Night in Deluxe Houseboat, Dal Lake (Double Sharing)",
+        "quantity": 1,
+        "unitPrice": 3800,
+        "unitCost": 3100,
+        "perPerson": true,
+        "confidence": "estimate",
+        "amount": 7600,
+        "costAmount": 6200
+      },
+      {
+        "kind": "hotel",
+        "label": "Standard Hotel Stays",
+        "detail": "5 Nights across Srinagar, Pahalgam, and Gulmarg (Double Sharing)",
+        "quantity": 5,
+        "unitPrice": 3200,
+        "unitCost": 2650,
+        "perPerson": true,
+        "confidence": "estimate",
+        "amount": 32000,
+        "costAmount": 26500
+      },
+      {
+        "kind": "transport",
+        "label": "Private Vehicle (Etios/Desire)",
+        "detail": "6 Days of transfers and local sightseeing in Srinagar/Gulmarg",
+        "quantity": 1,
+        "unitPrice": 16000,
+        "unitCost": 13500,
+        "perPerson": false,
+        "confidence": "known",
+        "amount": 16000,
+        "costAmount": 13500
+      },
+      {
+        "kind": "activity",
+        "label": "Gulmarg Gondola Tickets",
+        "detail": "Phase 1 (Kongdoori) tickets per person",
+        "quantity": 1,
+        "unitPrice": 850,
+        "unitCost": 740,
+        "perPerson": true,
+        "confidence": "known",
+        "amount": 1700,
+        "costAmount": 1480
+      },
+      {
+        "kind": "transport",
+        "label": "Pahalgam Local Union Cab",
+        "detail": "Mandatory local vehicle for Aru and Betaab Valley",
+        "quantity": 1,
+        "unitPrice": 3000,
+        "unitCost": 2600,
+        "perPerson": false,
+        "confidence": "known",
+        "amount": 3000,
+        "costAmount": 2600
+      },
+      {
+        "kind": "activity",
+        "label": "Shikara Ride",
+        "detail": "1-hour sunset ride on Dal Lake",
+        "quantity": 1,
+        "unitPrice": 800,
+        "unitCost": 600,
+        "perPerson": false,
+        "confidence": "known",
+        "amount": 800,
+        "costAmount": 600
+      }
+    ],
+    "travellers": 2,
+    "subtotal": 61100,
+    "cost": 50880,
+    "discount": 0,
+    "taxPercent": 5,
+    "tax": 3055,
+    "total": 64155,
+    "grossMargin": 10220,
+    "marginPercent": 17,
+    "perPerson": 32078,
+    "ownerId": "user_qatestadmin",
+    "createdById": "user_qatestadmin",
+    "createdByName": "QA Test Admin",
+    "token": "JYm8fjdVU7pX9XicAEGIaqx5",
+    "sentAt": "2026-10-14T13:50:39.054Z",
+    "decidedAt": "2026-10-14T13:51:18.516Z",
+    "validUntil": null,
+    "id": "quot_83db6ac8-de8",
+    "createdAt": "2026-10-14T13:49:55.837Z",
+    "updatedAt": "2026-10-14T13:51:18.518Z",
+    "decisionNote": null
+  }
+]

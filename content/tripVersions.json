@@ -1,0 +1,103 @@
+[
+  {
+    "key": "goa-beach-weekend@1",
+    "tripSlug": "goa-beach-weekend",
+    "kind": "group",
+    "content": {
+      "title": "Goa Beach Weekend",
+      "destination": "North Goa",
+      "region": "India",
+      "theme": "Beach",
+      "duration": "3N / 4D",
+      "summary": "Beach-facing stay, a sunset cruise, and one full day free to explore. QA-EDIT",
+      "coverImageId": null,
+      "highlights": [],
+      "days": [
+        {
+          "day": "1",
+          "title": "Arrive Goa",
+          "detail": "Airport pickup, check-in, evening at Baga Beach."
+        },
+        {
+          "day": "2",
+          "title": "North Goa sightseeing",
+          "detail": "Fort Aguada, Chapora, Anjuna flea market (seasonal)."
+        },
+        {
+          "day": "3",
+          "title": "Free day",
+          "detail": "Optional water sports at Calangute (extra), sunset river cruise included."
+        },
+        {
+          "day": "4",
+          "title": "Departure",
+          "detail": "Airport/station drop."
+        }
+      ],
+      "inclusions": [
+        "3 nights stay, breakfast daily",
+        "Airport pickup & drop, all sightseeing transfers",
+        "Sunset river cruise ticket"
+      ],
+      "exclusions": [
+        "Flights/train to Goa",
+        "Water sports",
+        "Lunch & dinner",
+        "Personal expenses"
+      ],
+      "faq": [
+        {
+          "q": "Is alcohol included on the cruise?",
+          "a": "One welcome drink is included; the bar is pay-as-you-go."
+        },
+        {
+          "q": "Is this suitable for families?",
+          "a": "Yes — this departure regularly has family groups alongside friend groups."
+        }
+      ],
+      "knowBefore": [],
+      "groupSize": "12–20 travellers",
+      "ageGroup": "18–40",
+      "advanceAmount": 3000,
+      "sharing": [
+        {
+          "id": "triple",
+          "label": "Triple sharing",
+          "detail": "Three to a room",
+          "delta": 0
+        },
+        {
+          "id": "double",
+          "label": "Double sharing",
+          "detail": "Two to a room",
+          "delta": 3500
+        },
+        {
+          "id": "single",
+          "label": "Single occupancy",
+          "detail": "A room to yourself",
+          "delta": 9500
+        }
+      ],
+      "pickups": [
+        {
+          "id": "goa",
+          "city": "Goa",
+          "detail": "Join at the airport or Madgaon",
+          "delta": 0
+        }
+      ],
+      "fromPrice": 0,
+      "bestTime": "",
+      "idealFor": [],
+      "places": []
+    },
+    "version": 1,
+    "status": "published",
+    "publishedAt": "2026-10-14T13:55:03.584Z",
+    "publishedByName": "QA Test Admin",
+    "id": "trip_d0663da0-cce",
+    "createdAt": "2026-10-14T13:55:03.588Z",
+    "updatedAt": "2026-10-14T13:55:03.588Z"
+  }
+]

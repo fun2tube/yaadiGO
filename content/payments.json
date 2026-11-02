@@ -1,0 +1,17 @@
+[
+  {
+    "bookingId": "book_65f6b47c-8f7",
+    "leadId": "lead_41b6cea9-c3e",
+    "kind": "advance",
+    "amount": 10000,
+    "method": "Bank transfer",
+    "reference": "UTR-QA-0001",
+    "note": null,
+    "receivedAt": "2026-10-14T12:00:00+05:30",
+    "recordedById": "user_qatestadmin",
+    "recordedByName": "QA Test Admin",
+    "id": "paym_ccfe0026-19b",
+    "createdAt": "2026-10-14T15:09:54.780Z",
+    "updatedAt": "2026-10-14T15:09:54.780Z"
+  }
+]

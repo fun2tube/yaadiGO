@@ -1,0 +1,28 @@
+[
+  {
+    "number": "YG/CN/26-27/0001",
+    "financialYear": "26-27",
+    "sequence": 1,
+    "invoiceId": "invo_3cfa228e-a95",
+    "invoiceNumber": "YG/26-27/0002",
+    "bookingId": "book_65f6b47c-8f7",
+    "issuedAt": "2026-10-14T15:11:52.833Z",
+    "issuedById": "user_qatestadmin",
+    "issuedByName": "QA Test Admin",
+    "reason": "QA test: one traveller dropped",
+    "taxPercent": 5,
+    "taxable": 10000,
+    "tax": 500,
+    "total": 10500,
+    "taxSplit": {
+      "kind": "igst",
+      "igst": 500,
+      "cgst": 0,
+      "sgst": 0
+    },
+    "currency": "INR",
+    "id": "cred_9efaa575-177",
+    "createdAt": "2026-10-14T15:11:52.835Z",
+    "updatedAt": "2026-10-14T15:11:52.835Z"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "storagePath": "2026/10/676087fa-2a5a-4cac-a35f-fa28a353d2da.jpg",
+    "backend": "local",
+    "url": "/api/media/file/2026/10/676087fa-2a5a-4cac-a35f-fa28a353d2da.jpg",
+    "type": "image/jpeg",
+    "bytes": 35273,
+    "width": 2000,
+    "height": 1333,
+    "title": "Qa gondola ride",
+    "alt": "Qa gondola ride",
+    "category": "hotel",
+    "tags": [],
+    "destination": "Srinagar",
+    "archived": false,
+    "uploadedById": "user_qatestadmin",
+    "uploadedByName": "QA Test Admin",
+    "id": "medi_7b2b13be-b89",
+    "createdAt": "2026-10-14T16:19:35.214Z",
+    "updatedAt": "2026-10-14T16:19:35.214Z"
+  },
+  {
+    "storagePath": "2026/10/a7f369c8-0fbc-4304-927b-31901b43d9d6.jpg",
+    "backend": "local",
+    "url": "/api/media/file/2026/10/a7f369c8-0fbc-4304-927b-31901b43d9d6.jpg",
+    "type": "image/jpeg",
+    "bytes": 35359,
+    "width": 2000,
+    "height": 1500,
+    "title": "Qa houseboat room",
+    "alt": "Qa houseboat room",
+    "category": "hotel",
+    "tags": [],
+    "destination": "Srinagar",
+    "archived": false,
+    "uploadedById": "user_qatestadmin",
+    "uploadedByName": "QA Test Admin",
+    "id": "medi_a8ec06cd-a6e",
+    "createdAt": "2026-10-14T16:19:24.392Z",
+    "updatedAt": "2026-10-14T16:19:24.393Z"
+  }
+]

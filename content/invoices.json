@@ -1,0 +1,175 @@
+[
+  {
+    "number": "YG/26-27/0002",
+    "financialYear": "26-27",
+    "sequence": 2,
+    "bookingId": "book_65f6b47c-8f7",
+    "leadId": "lead_41b6cea9-c3e",
+    "quotationId": "quot_0335983c-f81",
+    "issuedAt": "2026-10-14T15:11:25.750Z",
+    "issuedById": "user_qatestadmin",
+    "issuedByName": "QA Test Admin",
+    "seller": {
+      "name": "YaadiGo Networks Pvt Ltd",
+      "gstin": "07AAACY1234A1Z5",
+      "state": "Delhi",
+      "stateCode": "07",
+      "cin": null,
+      "address": {
+        "street": "Kalkaji",
+        "locality": "New Delhi",
+        "region": "Delhi",
+        "postalCode": null,
+        "country": "IN"
+      },
+      "email": "info@yaadigo.in",
+      "phone": "+91 73737 34778"
+    },
+    "customer": {
+      "name": "QA Fix Check",
+      "email": null,
+      "phone": "9000000009",
+      "gstin": null,
+      "address": null
+    },
+    "placeOfSupply": "Maharashtra",
+    "placeOfSupplyCode": "27",
+    "sac": "998555",
+    "taxSplit": {
+      "kind": "igst",
+      "igst": 9180,
+      "cgst": 0,
+      "sgst": 0
+    },
+    "title": "Kashmir Valley Escape",
+    "travellers": 2,
+    "travelDates": "9–15 Nov 2026",
+    "lines": [
+      {
+        "label": "Accommodation - 6 nights total",
+        "detail": "1 night in Srinagar houseboat, 2 nights in Gulmarg hotel, 2 nights in Pahalgam hotel, 1 night in Srinagar hotel on double occupancy with breakfast and dinner",
+        "quantity": 6,
+        "perPerson": true,
+        "amount": 162000
+      },
+      {
+        "label": "Private AC vehicle for transfers and sightseeing",
+        "detail": "Dedicated cab for airport transfers, intercity drives between Srinagar, Gulmarg, and Pahalgam, and local sightseeing",
+        "quantity": 1,
+        "perPerson": false,
+        "amount": 18000
+      },
+      {
+        "label": "Gondola Phase 1 ticket",
+        "detail": "Return ropeway ticket from Gulmarg base to Kongdoori",
+        "quantity": 1,
+        "perPerson": true,
+        "amount": 2000
+      },
+      {
+        "label": "Shikara ride on Dal Lake",
+        "detail": "One-hour boat ride on Dal Lake in Srinagar",
+        "quantity": 1,
+        "perPerson": true,
+        "amount": 1600
+      }
+    ],
+    "subtotal": 183600,
+    "discount": 0,
+    "taxPercent": 5,
+    "tax": 9180,
+    "total": 192780,
+    "currency": "INR",
+    "id": "invo_3cfa228e-a95",
+    "createdAt": "2026-10-14T15:11:25.754Z",
+    "updatedAt": "2026-10-14T15:11:25.754Z"
+  },
+  {
+    "number": "YG/26-27/0001",
+    "financialYear": "26-27",
+    "sequence": 1,
+    "bookingId": "book_1368859d-08f",
+    "leadId": "lead_94a0dd87-4af",
+    "quotationId": "quot_83db6ac8-de8",
+    "issuedAt": "2026-10-14T13:53:29.492Z",
+    "issuedById": "user_qatestadmin",
+    "issuedByName": "QA Test Admin",
+    "seller": {
+      "name": "YaadiGo Networks Pvt Ltd",
+      "gstin": null,
+      "cin": null,
+      "address": {
+        "street": "Kalkaji",
+        "locality": "New Delhi",
+        "region": "Delhi",
+        "postalCode": null,
+        "country": "IN"
+      },
+      "email": "info@yaadigo.in",
+      "phone": "+91 73737 34778"
+    },
+    "customer": {
+      "name": "QA Test Seat Hold",
+      "email": null,
+      "phone": "9000000002",
+      "gstin": null
+    },
+    "placeOfSupply": null,
+    "title": "Kashmir Valley Escape: Srinagar, Pahalgam & Gulmarg",
+    "travellers": 2,
+    "travelDates": "Dates to confirm",
+    "lines": [
+      {
+        "label": "Traditional Houseboat Stay",
+        "detail": "1 Night in Deluxe Houseboat, Dal Lake (Double Sharing)",
+        "quantity": 1,
+        "perPerson": true,
+        "amount": 7600
+      },
+      {
+        "label": "Standard Hotel Stays",
+        "detail": "5 Nights across Srinagar, Pahalgam, and Gulmarg (Double Sharing)",
+        "quantity": 5,
+        "perPerson": true,
+        "amount": 32000
+      },
+      {
+        "label": "Private Vehicle (Etios/Desire)",
+        "detail": "6 Days of transfers and local sightseeing in Srinagar/Gulmarg",
+        "quantity": 1,
+        "perPerson": false,
+        "amount": 16000
+      },
+      {
+        "label": "Gulmarg Gondola Tickets",
+        "detail": "Phase 1 (Kongdoori) tickets per person",
+        "quantity": 1,
+        "perPerson": true,
+        "amount": 1700
+      },
+      {
+        "label": "Pahalgam Local Union Cab",
+        "detail": "Mandatory local vehicle for Aru and Betaab Valley",
+        "quantity": 1,
+        "perPerson": false,
+        "amount": 3000
+      },
+      {
+        "label": "Shikara Ride",
+        "detail": "1-hour sunset ride on Dal Lake",
+        "quantity": 1,
+        "perPerson": false,
+        "amount": 800
+      }
+    ],
+    "subtotal": 61100,
+    "discount": 0,
+    "taxPercent": 5,
+    "tax": 3055,
+    "total": 64155,
+    "currency": "INR",
+    "id": "invo_9ab5ca67-f87",
+    "createdAt": "2026-10-14T13:53:29.493Z",
+    "updatedAt": "2026-10-14T13:53:29.493Z"
+  }
+]

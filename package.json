@@ -1,0 +1,50 @@
+{
+  "name": "yaadigo-os",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push",
+    "db:setup": "node scripts/db-setup.mjs",
+    "ai:doctor": "node scripts/ai-doctor.mjs",
+    "db:apply": "node scripts/apply-sql.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0",
+    "@measured/puck": "^0.20.2",
+    "@sparticuz/chromium": "153.0.0",
+    "drizzle-orm": "^0.45.3",
+    "motion": "^13.4.6",
+    "next": "16.3.6",
+    "nodemailer": "^10.0.13",
+    "postgres": "^3.4.9",
+    "puppeteer-core": "25.11.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^26.6.3",
+    "@types/react": "19.3.0",
+    "drizzle-kit": "^0.31.11",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.6",
+    "tailwindcss": "^4",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.2"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
+  }
+}

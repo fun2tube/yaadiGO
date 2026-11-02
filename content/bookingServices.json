@@ -1,0 +1,18 @@
+[
+  {
+    "bookingId": "book_1368859d-08f",
+    "kind": "hotel",
+    "status": "todo",
+    "title": "QA Houseboat Dal Lake",
+    "supplier": null,
+    "reference": null,
+    "startsAt": null,
+    "endsAt": null,
+    "cost": 0,
+    "note": null,
+    "assignedToId": "user_qatestadmin",
+    "id": "book_a2af27ea-b32",
+    "createdAt": "2026-10-14T13:52:57.774Z",
+    "updatedAt": "2026-10-14T13:52:57.774Z"
+  }
+]

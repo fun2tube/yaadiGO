@@ -1,0 +1,6 @@
+[mcp_servers.magicui]
+command = "npx"
+args = [
+    "-y",
+    "@magicuidesign/mcp@latest",
+]

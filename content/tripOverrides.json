@@ -1,0 +1,50 @@
+[
+  {
+    "id": "trip_8496d117-7f6",
+    "slug": "kashmir-valley-escape",
+    "departures": [
+      {
+        "id": "kve-1012",
+        "start": "2026-10-12",
+        "end": "2026-10-18",
+        "price": 28500,
+        "status": "available",
+        "capacity": 4
+      },
+      {
+        "id": "kve-1026",
+        "start": "2026-10-26",
+        "end": "2026-11-01",
+        "price": 28500,
+        "status": "available",
+        "capacity": 9
+      },
+      {
+        "id": "kve-1109",
+        "start": "2026-11-09",
+        "end": "2026-11-15",
+        "price": 27000,
+        "status": "available",
+        "capacity": 14
+      },
+      {
+        "id": "kve-1221",
+        "start": "2026-12-21",
+        "end": "2026-12-27",
+        "price": 34500,
+        "status": "filling",
+        "capacity": 2
+      },
+      {
+        "id": "kve-0111",
+        "start": "2027-01-11",
+        "end": "2027-01-17",
+        "price": 31000,
+        "status": "available",
+        "capacity": 16
+      }
+    ],
+    "createdAt": "2026-10-14T13:44:44.264Z",
+    "updatedAt": "2026-10-14T15:09:22.150Z"
+  }
+]
