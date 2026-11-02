@@ -7,7 +7,9 @@
 #   bash setup-vps.sh app        clone or update, env, database, migrate, build, start
 #   bash setup-vps.sh cutover    route yaadigo.com to the app, retire "Coming Soon"
 #   bash setup-vps.sh rollback   undo cutover: bring "Coming Soon" back
-#   bash setup-vps.sh backup     pg_dump the database to /root/yaadigo-backups
+#   bash setup-vps.sh backup         dump the database and photos to /root/yaadigo-backups
+#   bash setup-vps.sh restore-check  restore the newest dump into a scratch database
+#   bash setup-vps.sh schedule       install the nightly backup and weekly check (cron)
 #
 # Every stage is safe to run again. `app` never changes what yaadigo.com serves:
 # a new build only goes live through `cutover` (or, once cut over, by being
@@ -27,6 +29,7 @@ LETSENCRYPT_EMAIL=contact.eghai@gmail.com
 # The "Coming Soon" container (/home/super-admin/yaadigo-frontend).
 OLD_CONTAINER=yaadigo-frontend
 BACKUP_DIR=/root/yaadigo-backups
+KEEP_DAYS=14
 
 log() { printf '\n\033[1m== %s\033[0m\n' "$*"; }
 # This box has the standalone docker-compose v2 binary, not the CLI plugin.
@@ -148,10 +151,59 @@ rollback() {
 }
 
 backup() {
+  # Customer names, phones and payments: root-only, like the env files.
+  umask 077
   mkdir -p "$BACKUP_DIR" && chmod 700 "$BACKUP_DIR"
-  local file="$BACKUP_DIR/yaadigo-$(date +%F-%H%M).dump"
-  docker exec yaadigo-db pg_dump -U yaadigo -Fc yaadigo > "$file"
-  ls -lh "$file"
+  local stamp; stamp="$(date -u +%F-%H%M)"
+  local dump="$BACKUP_DIR/yaadigo-$stamp.dump" photos="$BACKUP_DIR/uploads-$stamp.tar.gz"
+  # Written under a .part name and renamed when complete, so a dump cut short
+  # (disk full, container restart) is never mistaken for a good one.
+  docker exec yaadigo-db pg_dump -U yaadigo -Fc yaadigo > "$dump.part"
+  # A dump pg_restore cannot read is not a backup.
+  docker exec -i yaadigo-db pg_restore --list < "$dump.part" > /dev/null
+  mv "$dump.part" "$dump"
+  docker exec yaadigo-app tar czf - -C /app uploads > "$photos.part"
+  mv "$photos.part" "$photos"
+  find "$BACKUP_DIR" -name '*.part' -mmin +60 -delete
+  find "$BACKUP_DIR" -type f -mtime +"$KEEP_DAYS" -delete
+  ls -lh "$dump" "$photos"
+}
+
+# Restores the newest dump into a scratch database and compares every table's
+# row count with the live one. Run weekly by cron; safe on the live box.
+restore_check() {
+  local dump scratch=yaadigo_restore_check
+  dump="$(ls -t "$BACKUP_DIR"/yaadigo-*.dump 2>/dev/null | head -1)"
+  [ -n "$dump" ] || { echo "No dump in $BACKUP_DIR"; exit 1; }
+  log "Restoring $(basename "$dump") into $scratch"
+  psql_db() { docker exec -i yaadigo-db psql -U yaadigo -d "$1" -tAq -v ON_ERROR_STOP=1 -c "$2"; }
+  psql_db postgres "drop database if exists $scratch"
+  psql_db postgres "create database $scratch"
+  docker exec -i yaadigo-db pg_restore -U yaadigo -d "$scratch" --no-owner --exit-on-error < "$dump"
+  local tables table
+  tables="$(psql_db "$scratch" "select tablename from pg_tables where schemaname = 'public' order by 1")"
+  # For the eye, not a pass/fail: rows written or deleted since the dump make
+  # the two differ legitimately. pg_restore --exit-on-error is the real test.
+  for table in $tables; do
+    printf '%-22s restored %6s   live now %6s\n' "$table" \
+      "$(psql_db "$scratch" "select count(*) from \"$table\"")" \
+      "$(psql_db yaadigo "select count(*) from \"$table\"")"
+  done
+  psql_db postgres "drop database $scratch"
+  [ -n "$tables" ] || { echo "FAIL: the restore has no tables"; exit 1; }
+  echo "OK: $(echo "$tables" | wc -w) tables restored from $(basename "$dump")"
+}
+
+# Nightly backup at 03:00 IST, weekly restore check on Sundays at 04:00 IST
+# (the server runs on UTC). Output goes to /var/log/yaadigo-backup.log.
+schedule() {
+  cat > /etc/cron.d/yaadigo-backup <<EOF
+# Installed by $APP_DIR/deploy/setup-vps.sh schedule. Times are UTC.
+30 21 * * * root bash $APP_DIR/deploy/setup-vps.sh backup >> /var/log/yaadigo-backup.log 2>&1
+30 22 * * 6 root bash $APP_DIR/deploy/setup-vps.sh restore-check >> /var/log/yaadigo-backup.log 2>&1
+EOF
+  chmod 644 /etc/cron.d/yaadigo-backup
+  cat /etc/cron.d/yaadigo-backup
 }
 
 case "${1:-}" in
@@ -160,5 +212,7 @@ case "${1:-}" in
   cutover) cutover ;;
   rollback) rollback ;;
   backup) backup ;;
-  *) echo "usage: bash $0 inspect|app|cutover|rollback|backup"; exit 1 ;;
+  restore-check) restore_check ;;
+  schedule) schedule ;;
+  *) echo "usage: bash $0 inspect|app|cutover|rollback|backup|restore-check|schedule"; exit 1 ;;
 esac

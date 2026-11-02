@@ -70,8 +70,27 @@ build goes live as soon as it starts (a few seconds of 502 while it boots).
 
 ## Backups
 
-The database is now on one machine and nothing backs it up off the box yet
-(backlog #184). Until that is set up, take a dump before every update:
+Installed 2026-11-02 by `setup-vps.sh schedule` (`/etc/cron.d/yaadigo-backup`):
+
+- **Nightly, 03:00 IST:** `backup` writes `yaadigo-<date>.dump` (pg_dump,
+  custom format, checked readable by `pg_restore --list`) and
+  `uploads-<date>.tar.gz` (the photo volume) to `/root/yaadigo-backups`,
+  root-only, and deletes files older than 14 days.
+- **Sundays, 04:00 IST:** `restore-check` restores the newest dump into a
+  scratch database, prints each table's row count beside the live one, and
+  drops it.
+- Both log to `/var/log/yaadigo-backup.log`.
+
+These copies sit **on the same server**: they cover a bad deploy or a
+mistaken delete, not losing the server. An off-server copy is backlog #184.
+
+Take one by hand before every update:
 ```bash
 ssh root@72.60.202.179 'bash /opt/yaadigo-os/deploy/setup-vps.sh backup'
+```
+
+Restore (replaces the live data; take a fresh backup first):
+```bash
+docker exec -i yaadigo-db pg_restore -U yaadigo -d yaadigo --clean --if-exists --no-owner < /root/yaadigo-backups/yaadigo-<date>.dump
+docker restart yaadigo-app
 ```
