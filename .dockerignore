@@ -1,0 +1,13 @@
+# Secrets reach the build as a BuildKit secret and the app through env_file,
+# never through the image.
+.env*
+!.env.example
+node_modules
+.next
+uploads
+.git
+.claude
+coverage
+seo-reports
+*.tsbuildinfo
+next-env.d.ts

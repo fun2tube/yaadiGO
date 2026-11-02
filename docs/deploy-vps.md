@@ -2,69 +2,76 @@
 
 **Decided 2026-11-02:** the database moves off Supabase, which became
 unreachable (`tenant/user … not found`, backlog #179), to PostgreSQL on the
-same VPS that serves yaadigo.com (72.60.202.179). The schema and code are
+VPS that serves yaadigo.com (72.60.202.179). The schema and code are
 unchanged; MySQL was considered and rejected (40 `.returning()` calls, pg
 enums, jsonb, CHECK invariants, PGlite tests: weeks of rewrite in the money and
 seat code). The new database starts **empty**: no trips, leads or bookings
 carry over.
 
-What runs on the box:
+**How the box works (inspected 2026-11-02):** every site on it (Muscle Spark,
+Holidays Planners, IMR, the Travel-backend API at api.yaadigo.com, …) is a
+Docker container. A shared `nginx-proxy` (jwilder/nginx-proxy) owns ports 80
+and 443 and routes by each container's `VIRTUAL_HOST`; `acme-companion` issues
+the HTTPS certificates from `LETSENCRYPT_HOST`. Both are defined in
+`/home/super-admin/apps/Travel-backend`. YaadiGo joins the same way, so no
+nginx file or certbot run is needed and nothing else on the box changes.
 
 | Piece | Where |
 |---|---|
-| App (`next start`, PM2 process `yaadigo`) | `/var/www/yaadigo`, user `yaadigo`, `127.0.0.1:3100` |
-| PostgreSQL | localhost:5432, database and role `yaadigo`, password in `/root/yaadigo-db-password` |
-| Env | `/var/www/yaadigo/.env.local` (600), generated from `/root/yaadigo.env` |
-| Photo uploads | `/var/www/yaadigo/uploads/` (no `SUPABASE_*` set, so `media-store.js` uses the disk) |
-| PDFs | Google Chrome, `CHROME_PATH=/usr/bin/google-chrome-stable` |
-| nginx | `/etc/nginx/sites-available/yaadigo` from `deploy/nginx-yaadigo.conf` |
+| Checkout | `/opt/yaadigo-os` (root) |
+| App | container `yaadigo-app`, image from `Dockerfile`, port 3000 on the `proxy` network |
+| PostgreSQL 17 | container `yaadigo-db`, volume `yaadigo-os_pgdata`, `127.0.0.1:5433` on the host only |
+| DB password | `/root/yaadigo-db-password` |
+| Env | `/root/yaadigo.env` (uploaded) → `.env.runtime` and `.env.build` in the checkout, written by the script |
+| Routing | `.env.routing` in the checkout: absent = not served, present = yaadigo.com + www |
+| Photo uploads | volume `yaadigo-os_uploads` (no `SUPABASE_*` set, so `media-store.js` uses the disk) |
+| PDFs | Debian Chromium in the image, `CHROME_PATH=/usr/bin/chromium` |
+| Old "Coming Soon" | container `yaadigo-frontend` (`/home/super-admin/yaadigo-frontend`), stopped at cutover, kept for rollback |
+
+`corporate.yaadigo.com` is left out of the routing until its DNS record
+exists: one unresolvable name fails the certificate for all of them.
 
 ## First deploy
 
-1. **Look before changing anything.** This VPS may host other sites.
+1. **Upload the script and the production secrets.** Start from your
+   `.env.local`. The script replaces `DATABASE_URL` and drops
+   `DIRECT_DATABASE_URL` and `SUPABASE_*`. `ADMIN_EMAIL` and `ADMIN_PASSWORD`
+   create the first admin on the empty database. Add `COMPANY_GSTIN` if
+   invoices are needed.
    ```bash
    scp deploy/setup-vps.sh root@72.60.202.179:/root/
-   ssh root@72.60.202.179 'bash /root/setup-vps.sh inspect'
-   ```
-   Check: are ports 3100 and 5432 free, which nginx file serves "Coming Soon"
-   for yaadigo.com, and how much RAM there is.
-2. **Upload the production secrets.** Start from your `.env.local`. The
-   script replaces `DATABASE_URL` and drops `DIRECT_DATABASE_URL` and
-   `SUPABASE_*`. `ADMIN_EMAIL` and `ADMIN_PASSWORD` create the first admin on
-   the empty database, so set a strong password before uploading. Add
-   `COMPANY_GSTIN` if invoices are needed.
-   ```bash
    scp .env.local root@72.60.202.179:/root/yaadigo.env
-   ssh root@72.60.202.179 'chmod 600 /root/yaadigo.env'
+   ssh root@72.60.202.179 'chmod 600 /root/yaadigo.env && bash /root/setup-vps.sh inspect'
    ```
-3. **Install, then deploy.**
+2. **Build and start, unrouted.** Clones the repo, creates the database,
+   runs the migrations, builds the image and starts it. yaadigo.com still
+   shows "Coming Soon" afterwards. Ends with a smoke test inside the
+   container. Takes about 10 minutes.
    ```bash
-   ssh root@72.60.202.179 'bash /root/setup-vps.sh install'
    ssh root@72.60.202.179 'bash /root/setup-vps.sh app'
    ```
-   `app` ends with a smoke test of `/` and `/corporate` on port 3100.
-4. **Switch nginx over (reviewed by hand).** Disable the "Coming Soon"
-   server block for yaadigo.com that `inspect` found, then:
+3. **Cut over.** Stops "Coming Soon" and routes yaadigo.com and
+   www.yaadigo.com to the app.
    ```bash
-   cp /var/www/yaadigo/deploy/nginx-yaadigo.conf /etc/nginx/sites-available/yaadigo
-   ln -s /etc/nginx/sites-available/yaadigo /etc/nginx/sites-enabled/yaadigo
-   nginx -t && systemctl reload nginx
-   certbot --nginx -d yaadigo.com -d www.yaadigo.com
+   ssh root@72.60.202.179 'bash /opt/yaadigo-os/deploy/setup-vps.sh cutover'
    ```
-5. **Sign in** at `https://www.yaadigo.com/admin/login` with `ADMIN_EMAIL` /
+   To undo: `setup-vps.sh rollback`.
+4. **Sign in** at `https://www.yaadigo.com/admin/login` with `ADMIN_EMAIL` /
    `ADMIN_PASSWORD`, then change the password in Team.
 
 ## Updating
 
 Push to `main`, then:
 ```bash
-ssh root@72.60.202.179 'bash /var/www/yaadigo/deploy/setup-vps.sh app'
+ssh root@72.60.202.179 'bash /opt/yaadigo-os/deploy/setup-vps.sh app'
 ```
+Once cut over, `app` recreates the container with its routing, so the new
+build goes live as soon as it starts (a few seconds of 502 while it boots).
 
 ## Backups
 
-The database is now on one machine and nothing backs it up yet (backlog
-#184). Until that is set up, take a dump before every update:
+The database is now on one machine and nothing backs it up off the box yet
+(backlog #184). Until that is set up, take a dump before every update:
 ```bash
-sudo -u postgres pg_dump -Fc yaadigo > /root/yaadigo-$(date +%F).dump
+ssh root@72.60.202.179 'bash /opt/yaadigo-os/deploy/setup-vps.sh backup'
 ```

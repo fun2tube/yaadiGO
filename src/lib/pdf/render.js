@@ -64,7 +64,14 @@ async function launch() {
   return puppeteer.launch({
     executablePath,
     headless: true,
-    args: ["--no-first-run", "--no-default-browser-check", "--disable-extensions"],
+    args: [
+      "--no-first-run",
+      "--no-default-browser-check",
+      "--disable-extensions",
+      // Docker's default seccomp profile leaves Chromium no usable sandbox.
+      // Set by the Dockerfile; renderPdf only ever loads our own origin.
+      ...(process.env.CHROME_NO_SANDBOX === "1" ? ["--no-sandbox"] : []),
+    ],
   });
 }
 

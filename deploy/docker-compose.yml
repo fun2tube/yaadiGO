@@ -1,0 +1,83 @@
+# YaadiGo on the Hostinger VPS. Driven by deploy/setup-vps.sh; see
+# docs/deploy-vps.md. The env files live in the checkout root, are written by
+# the script and are git-ignored.
+name: yaadigo-os
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: yaadigo-db
+    restart: always
+    environment:
+      POSTGRES_DB: yaadigo
+      POSTGRES_USER: yaadigo
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets: [db_password]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # Localhost only: the build reaches the database through the host network,
+    # and pg_dump runs from the host. Never published to the internet.
+    ports:
+      - "127.0.0.1:5433:5432"
+    networks: [internal]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U yaadigo -d yaadigo"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # One-off: `docker compose run --rm migrate`.
+  migrate:
+    profiles: [tools]
+    build:
+      context: ..
+      target: source
+    image: yaadigo-os-source
+    env_file:
+      - path: ../.env.runtime
+    command: ["npx", "drizzle-kit", "migrate"]
+    networks: [internal]
+    depends_on:
+      db: { condition: service_healthy }
+
+  app:
+    build:
+      context: ..
+      target: runner
+      # The build prerenders from Postgres, reached on 127.0.0.1:5433.
+      network: host
+      secrets: [build_env]
+    image: yaadigo-os-app
+    container_name: yaadigo-app
+    restart: always
+    env_file:
+      - path: ../.env.runtime
+      # VIRTUAL_HOST / LETSENCRYPT_HOST for the shared nginx-proxy. Absent
+      # until `setup-vps.sh cutover`, so a fresh build is never served early.
+      - path: ../.env.routing
+        required: false
+    environment:
+      VIRTUAL_PORT: "3000"
+    volumes:
+      - uploads:/app/uploads
+    # Chromium needs more than Docker's default 64 MB of /dev/shm.
+    shm_size: 256m
+    networks: [internal, proxy]
+    depends_on:
+      db: { condition: service_healthy }
+
+secrets:
+  db_password:
+    file: ${DB_PASSWORD_FILE:-/root/yaadigo-db-password}
+  build_env:
+    file: ../.env.build
+
+volumes:
+  pgdata:
+  uploads:
+
+networks:
+  internal:
+  # The shared network nginx-proxy and acme-companion watch.
+  proxy:
+    external: true
