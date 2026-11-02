@@ -29,7 +29,7 @@ const COLUMNS = [
     title: "Business",
     links: [
       { href: "/corporate-travel", label: "Corporate Travel" },
-      { href: CORPORATE_URL, label: "Corporate Desk ↗", external: true },
+      { href: CORPORATE_URL, label: "For Corporate" },
     ],
   },
   {

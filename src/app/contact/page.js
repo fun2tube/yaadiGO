@@ -14,7 +14,7 @@ import {
 } from "@/lib/site";
 
 export const metadata = {
-  title: "Contact YaadiGo — Trip Planning & Corporate Desk",
+  title: "Contact YaadiGo — Trip Planning & Corporate Travel",
   description:
     // No response-time promise here. The 4-hour nudge and 8-hour escalation in
     // lib/crm/sla.js are an internal routing rule, not a published commitment,
@@ -82,7 +82,7 @@ export default async function ContactPage() {
                   )}
                   <div>
                     <dt className="text-[12px] font-semibold uppercase tracking-wide text-paper-text-faint">
-                      Corporate Travel Desk
+                      For Corporate
                     </dt>
                     <dd className="mt-0.5 text-[15px] text-paper-text">
                       <a href={`mailto:${CONTACT.corporateEmail}`}>{CONTACT.corporateEmail}</a>
@@ -132,14 +132,14 @@ export default async function ContactPage() {
             </Editable>
                 <Editable id="contact.billing-terms-the-proposal-form" as="p" multiline className="mt-2 text-[13.5px] leading-relaxed text-paper-text-muted">
                   Billing terms, the proposal form and a discovery call all
-                  live on the Corporate Travel Desk — no minimum monthly
+                  live on our For Corporate page — no minimum monthly
                   booking volume to qualify.
             </Editable>
                 <a
                   href={CORPORATE_URL}
                   className="mt-4 inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-accent-deep"
                 >
-                  Go to the Corporate Travel Desk <ChevronIcon size={14} />
+                  Go to For Corporate <ChevronIcon size={14} />
                 </a>
               </div>
 

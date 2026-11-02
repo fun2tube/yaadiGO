@@ -46,7 +46,7 @@ export default function CorporateNav() {
               YaadiGo
             </span>
             <span className="mt-0.5 text-[9px] font-black uppercase tracking-[0.16em] text-accent">
-              Corporate Desk
+              For Corporate
             </span>
           </span>
         </Link>

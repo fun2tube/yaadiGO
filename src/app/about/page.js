@@ -33,10 +33,10 @@ const DIVISIONS = [
       "You give us destination, dates, group size and a budget band; we come back with a full draft itinerary, free, and refine it with you for as many rounds as it takes. Nothing is payable until you approve it.",
   },
   {
-    href: "/corporate-travel",
-    title: "Corporate Travel Desk",
+    href: CORPORATE_URL,
+    title: "For Corporate",
     detail:
-      "A named travel executive, a prepaid wallet instead of a credit application, and an AI finance agent that validates and reconciles every invoice. No minimum monthly booking volume to qualify. Runs at corporate.yaadigo.com.",
+      "A named travel executive, a prepaid wallet instead of a credit application, and an AI finance agent that validates and reconciles every invoice. No minimum monthly booking volume to qualify.",
   },
 ];
 
@@ -199,7 +199,7 @@ export default async function AboutPage() {
               href={CORPORATE_URL}
               className="rounded-full border border-paper-line-strong px-6 py-3 text-[14px] font-semibold text-paper-text"
             >
-              Corporate Travel Desk →
+              For Corporate →
             </a>
           </div>
         </section>

@@ -10,7 +10,7 @@ import { CORPORATE_URL } from "@/lib/site";
 
 // Leisure products only (see docs/design/homepage-content-strategy.md):
 // one name per product, used everywhere. Corporate is a different audience
-// with its own site, so it sits apart on the right as "For business".
+// with its own landing page, so it sits apart on the right as "For Corporate".
 const NAV_LINKS = [
   { href: "/group-tours", label: "Group Tours", index: "01", mega: true },
   { href: "/customized-tours", label: "Customized Tours", index: "02" },
@@ -22,6 +22,7 @@ const MOBILE_LINKS = [
   ...NAV_LINKS,
   { href: "/about", label: "About", index: "05" },
   { href: "/contact", label: "Contact", index: "06" },
+  { href: "/corporate", label: "For Corporate", index: "07" },
 ];
 
 /**
@@ -169,7 +170,7 @@ export default function SiteNavClient({ trips, links, mobileLinks }) {
               href={CORPORATE_URL}
               className="hidden whitespace-nowrap px-2 text-[14px] font-semibold text-paper-text-muted transition-colors hover:text-paper-text xl:block"
             >
-              For business
+              For Corporate
             </a>
             <Link
               href="/contact"
@@ -273,7 +274,7 @@ export default function SiteNavClient({ trips, links, mobileLinks }) {
               href={CORPORATE_URL}
               className="py-2 text-center text-[14px] font-semibold text-paper-text-muted"
             >
-              Booking for a company? Corporate Travel Desk →
+              Booking for a company? For Corporate →
             </a>
           </div>
         </div>

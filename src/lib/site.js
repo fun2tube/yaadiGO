@@ -4,7 +4,10 @@ export const SITE_URL = "https://www.yaadigo.com";
 export const SITE_NAME = "YaadiGo";
 export const ORG_LEGAL_NAME = "YaadiGo Networks Pvt Ltd";
 
-export const CORPORATE_URL = "https://corporate.yaadigo.com";
+// The "For Corporate" landing page. Relative on purpose: corporate.yaadigo.com
+// has no DNS yet, so an absolute link went nowhere. src/proxy.js leaves
+// /corporate alone on the subdomain too, so this works on both hosts.
+export const CORPORATE_URL = "/corporate";
 
 // ---------------------------------------------------------------------------
 // Business details.

@@ -664,7 +664,7 @@ export default async function Home() {
           <p className="mx-auto mt-6 max-w-7xl text-center text-[14px] text-paper-text-muted">
             Booking travel for your company?{" "}
             <a href={CORPORATE_URL} className="font-bold text-paper-text underline-offset-4 hover:underline">
-              Corporate Travel Desk →
+              For Corporate →
             </a>
           </p>
         </section>

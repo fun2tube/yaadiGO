@@ -25,13 +25,13 @@ import {
 // Served at corporate.yaadigo.com via src/proxy.js, and reachable at
 // /corporate on the main domain.
 export const metadata = {
-  title: "Corporate Travel Desk — GST-Compliant Business Travel, No Minimum Volume",
+  title: "For Corporate — GST-Compliant Business Travel, No Minimum Volume",
   description:
     "A named travel executive, 24-hour booking turnaround, a prepaid wallet instead of a credit application, and an AI finance agent that validates every invoice, reconciles GSTR-2B and tracks input tax credit. No minimum monthly booking volume to qualify.",
   alternates: { canonical: "/corporate" },
   openGraph: {
     type: "website",
-    title: "YaadiGo Corporate Travel Desk",
+    title: "YaadiGo For Corporate",
     description:
       "Prepaid wallet, no credit application. An AI finance agent handles invoicing, GST compliance and reconciliation. No minimum monthly volume to qualify.",
   },
@@ -164,7 +164,7 @@ export default function CorporateLandingPage() {
           <NeuralField density={1.15} />
           <div className="relative mx-auto w-full max-w-6xl px-6 py-10 sm:px-10">
             <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/12 px-4 py-1.5 eyebrow text-accent">
-              Corporate Travel Desk
+              For Corporate
             </span>
             <h1 className="mt-6 max-w-3xl font-display text-[36px] font-black leading-[1.05] tracking-tight text-ink-text sm:text-[58px]">
               A named executive books it. Finance gets a{" "}

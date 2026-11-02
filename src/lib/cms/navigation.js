@@ -23,7 +23,7 @@ export const NAVIGATION = "navigation";
 /** The coded default. Mirrors NAV_LINKS in site-nav-client.js. */
 // Leisure products only, one name each (docs/design/homepage-content-
 // strategy.md). Corporate is a separate audience: it is linked as "For
-// business" on the right of the bar and in the footer, not listed here.
+// Corporate" on the right of the bar and in the footer, not listed here.
 export const DEFAULT_LINKS = [
   { href: "/group-tours", label: "Group Tours", mega: true },
   { href: "/customized-tours", label: "Customized Tours" },
@@ -35,6 +35,9 @@ export const DEFAULT_LINKS = [
 export const DEFAULT_MOBILE_EXTRA = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
+  // On a phone the bar's "For Corporate" link has nowhere to go, so the
+  // corporate landing page is listed here instead.
+  { href: "/corporate", label: "For Corporate" },
 ];
 
 

@@ -7,9 +7,9 @@ import SiteFooter from "@/components/site-footer";
 import { PlaneIcon, UsersIcon, CarIcon, MapIcon, ReceiptIcon, ShieldIcon, ChevronIcon, ClockIcon, WalletIcon, RobotIcon } from "@/components/icons";
 
 export const metadata = {
-  title: "Corporate Travel Desk",
+  title: "Corporate Travel",
   description:
-    "A named travel executive, a prepaid wallet instead of a credit application, an AI finance agent for invoicing and GST reconciliation, and fixed-price offsite packages — see the full Corporate Travel Desk at corporate.yaadigo.com.",
+    "A named travel executive, a prepaid wallet instead of a credit application, an AI finance agent for invoicing and GST reconciliation, and fixed-price offsite packages — see the full For Corporate page.",
   alternates: { canonical: "/corporate-travel" },
 };
 
@@ -74,7 +74,7 @@ export default async function CorporateTravelPromoPage() {
         <section className="bg-ink">
           <div className="mx-auto max-w-6xl px-6 py-16 sm:px-10 sm:py-20">
             <Editable id="corporate.eyebrow" as="span" className="text-xs font-bold uppercase tracking-[0.13em] text-accent">
-              Corporate Travel Desk
+              For Corporate
             </Editable>
             <Editable id="corporate.heading" as="h1" className="mt-2 max-w-2xl font-display text-[32px] font-medium leading-[1.2] text-ink-text sm:text-[42px]">
               A named executive handles your bookings. Finance gets a clean invoice. Nobody chases anybody.
@@ -88,10 +88,10 @@ export default async function CorporateTravelPromoPage() {
             </Editable>
             <div className="mt-7 flex flex-wrap gap-3">
               <a
-                href="https://corporate.yaadigo.com"
+                href="/corporate"
                 className="flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-[14.5px] font-semibold text-ink transition-transform hover:scale-[1.03]"
               >
-                See the full Corporate Travel Desk <ChevronIcon size={15} />
+                See For Corporate <ChevronIcon size={15} />
               </a>
               <a
                 href="mailto:corporate@yaadigo.com"
@@ -175,14 +175,14 @@ export default async function CorporateTravelPromoPage() {
             </Editable>
             <Editable id="corporate.the-full-process-wallet-terms" as="p" multiline className="mt-2 max-w-lg text-[14px] leading-relaxed text-paper-text-muted">
               The full process, wallet terms, and proposal form live on
-              corporate.yaadigo.com — that&apos;s where a discovery call gets
+              our For Corporate page — that&apos;s where a discovery call gets
               booked.
             </Editable>
             <Link
-              href="https://corporate.yaadigo.com"
+              href="/corporate"
               className="mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-[14.5px] font-semibold text-ink-text transition-transform hover:scale-[1.03]"
             >
-              Go to the Corporate Travel Desk <ChevronIcon size={15} />
+              Go to For Corporate <ChevronIcon size={15} />
             </Link>
           </div>
         </section>
