@@ -286,6 +286,7 @@ Code items #154–#168 were fixed 2026-10-14 and moved to Done. What is left nee
 | 180 | If a menu was saved in Admin → Navigation, add "For Corporate" (`/corporate`) to its phone extras. The saved menu overrides the coded one (F2) | S2 | You | Phone menu lists For Corporate on the live DB |
 | 181 | Choose one corporate page: `/corporate` (lead form) or `/corporate-travel` (CMS). Redirect the other (F3) | S3 | CTO + You | One corporate URL in the sitemap |
 | 182 | Check saved page edits on `/contact` and `/corporate-travel` for "Corporate Travel Desk" and rename them to For Corporate (F4) | S3 | You | No "Corporate Desk" wording on the live site |
+| 184 | **Nightly Postgres backups off the VPS**: the database now lives on one machine (docs/deploy-vps.md). Schedule `pg_dump` and copy it to storage on another machine | **S1** | DevOps | A restore from last night's dump works on a scratch database |
 | 183 | Fix the failing `trip-seats.test.js` › "the editor cannot shrink a batch below what is booked" (F5) | S2 | DevOps | vitest all green |
 
 ## Done
