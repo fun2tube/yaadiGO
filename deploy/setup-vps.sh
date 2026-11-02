@@ -63,8 +63,10 @@ write_env() {
   local password base
   password="$(cat "$DB_PASSWORD_FILE")"
   base="$(grep -vE '^(DATABASE_URL|DIRECT_DATABASE_URL|SUPABASE_[A-Z_]*|CHROME_PATH)=' "$ENV_SOURCE" | tr -d '\r')"
-  # The app reaches Postgres by its service name on the internal network...
-  printf '%s\nDATABASE_URL=postgres://yaadigo:%s@db:5432/yaadigo\n' "$base" "$password" > "$APP_DIR/.env.runtime"
+  # The app reaches Postgres by container name. Not the service name "db": the
+  # app is also on the shared proxy network, where musclesspark-db answers to
+  # "db" too, and Docker's DNS handed the app that one.
+  printf '%s\nDATABASE_URL=postgres://yaadigo:%s@yaadigo-db:5432/yaadigo\n' "$base" "$password" > "$APP_DIR/.env.runtime"
   # ...the build, on the host network, through the localhost port.
   printf '%s\nDATABASE_URL=postgres://yaadigo:%s@127.0.0.1:5433/yaadigo\n' "$base" "$password" > "$APP_DIR/.env.build"
   chmod 600 "$APP_DIR/.env.runtime" "$APP_DIR/.env.build"
