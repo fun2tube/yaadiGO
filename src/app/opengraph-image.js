@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { SITE_NAME } from "@/lib/site";
+import { OgLogo } from "@/components/og-card";
 
 export const alt =
   "YaadiGo — group tours and customized trips, India and abroad";
@@ -20,29 +20,8 @@ export default function OpengraphImage() {
           padding: 72,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 14,
-              background: "#E8963D",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M3 12h4l2-7 4 14 2-7h6"
-                stroke="#10141C"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <div style={{ fontSize: 40, color: "#F6F4EE", letterSpacing: -0.5 }}>{SITE_NAME}</div>
+        <div style={{ display: "flex" }}>
+          <OgLogo />
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>

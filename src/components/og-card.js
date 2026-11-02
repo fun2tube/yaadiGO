@@ -1,4 +1,5 @@
-import { SITE_NAME } from "@/lib/site";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 
 /**
  * The shared share-card layout, used by every `opengraph-image` route.
@@ -49,6 +50,33 @@ const ACCENT = "#E8963D";
 const MUTED = "#9BA3B0";
 const FAINT = "#6E7686";
 
+// The owner's logo (components/brand-logo.js), inlined: Satori needs the bytes,
+// not a URL it would have to fetch from this same server mid-render.
+const LOGO = `data:image/png;base64,${readFileSync(
+  path.join(process.cwd(), "public/brand/yaadigo-logo.png")
+).toString("base64")}`;
+
+/**
+ * The logo on a white tile: its dark green wordmark disappears on the ink
+ * background, the same reason the corporate header backs it in white.
+ */
+export function OgLogo({ height = 84 }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        background: "#FFFFFF",
+        borderRadius: 16,
+        padding: "10px 16px",
+      }}
+    >
+      {/* Satori rasterises plain <img>; next/image means nothing here. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={LOGO} alt="" height={height} width={Math.round((height * 388) / 222)} />
+    </div>
+  );
+}
+
 export function OgCard({ eyebrow, title, meta = [], footnote }) {
   // Long trip names and blog headlines need different type sizes or they
   // either overflow the card or float in the middle of it looking unfinished.
@@ -66,34 +94,11 @@ export function OgCard({ eyebrow, title, meta = [], footnote }) {
         padding: 72,
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-        <div
-          style={{
-            width: 56,
-            height: 56,
-            borderRadius: 14,
-            background: ACCENT,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M3 12h4l2-7 4 14 2-7h6"
-              stroke={INK}
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 34, color: PAPER, letterSpacing: -0.5 }}>{SITE_NAME}</div>
-          {eyebrow ? (
-            <div style={{ fontSize: 21, color: ACCENT, letterSpacing: 0.4 }}>{eyebrow}</div>
-          ) : null}
-        </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+        <OgLogo />
+        {eyebrow ? (
+          <div style={{ fontSize: 24, color: ACCENT, letterSpacing: 0.4 }}>{eyebrow}</div>
+        ) : null}
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>

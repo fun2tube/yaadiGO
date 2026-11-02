@@ -291,11 +291,13 @@ Code items #154–#168 were fixed 2026-10-14 and moved to Done. What is left nee
 | 188 | Zero-downtime deploys: start the new container beside the old one and switch, instead of recreating in place (F6) | S3 | DevOps | `app` serves no 502 during a deploy |
 | 189 | Once `corporate.yaadigo.com` has a DNS A record → 72.60.202.179, add it to `HOSTS` in `setup-vps.sh` and run `cutover` (F7) | S3 | You → DevOps | https://corporate.yaadigo.com shows the corporate page |
 | 190 | First live use, by the owner: sign in and change the password, add one trip, send one enquiry, upload one photo, print one quotation PDF (PM review) | **S1** (go-live) | You | Each works on www.yaadigo.com |
+| 191 | Get the logo as a vector (SVG/AI/PDF) or a ≥2000 px PNG from its designer. The supplied file is 400×400 and slightly JPEG-soft: fine on screen, not for banners or print (review 2026-11-02-brand-logo, F2) | S3 | You | `public/brand/` regenerated from the original |
 
 ## Done
 
 | Task | Finding | Closed |
 |---|---|---|
+| **Brand logo** on the site: header, corporate header, admin, quotation letterhead and PDF, trip-plan PDF, share cards, browser/iPhone/Android icons, Google's organisation logo. Review 2026-11-02-brand-logo | User request | 2026-11-02 |
 | **Deployed to the Hostinger VPS** as Docker containers behind the box's shared nginx-proxy, with Postgres 17 on the server (new, empty DB) and nightly backups plus a weekly restore check. Closes #157 (deploy), #179 (Supabase unreachable) and #175 (photos now go to the server's `uploads` volume). Review 2026-11-02-vps-deploy-and-backups | User request | 2026-11-02 |
 | **"For Corporate" tab**: header, phone menu and footer link to the existing `/corporate` lead page (the subdomain had no DNS, so "For business" went nowhere); segment renamed to For Corporate everywhere a visitor sees it | User request | 2026-11-02 |
 | **Media library + quotation register + reports** — photo library with upload (shrunk in the browser, type checked by bytes) and a picker on every image slot in a quotation (cover, hotels, flights, activities, stay/transport galleries, route map); staff preview for drafts (the 404); quotation register with periods, filters, KPIs, charts, CSV, ops read-only; reports rebuilt (any period, like-for-like comparison, funnel, 12-month trend, team scorecard + CSV, sources, destinations, integrity incl. duplicate bookings); More sheet on the phone nav (six sections were unreachable); slim price bar | User request | 2026-10-14 |

@@ -1,24 +1,3 @@
-export function LogoMark({ className = "" }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="16"
-      height="16"
-      fill="none"
-      className={className}
-      aria-hidden="true"
-    >
-      <path
-        d="M3 12h4l2-7 4 14 2-7h6"
-        stroke="#10141C"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 export function CheckIcon({ className = "", color = "currentColor", size = 16 }) {
   return (
     <svg

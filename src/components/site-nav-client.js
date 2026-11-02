@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LogoMark, ChevronIcon, SparkleIcon } from "./icons";
+import { ChevronIcon, SparkleIcon } from "./icons";
+import BrandLogo from "./brand-logo";
 import { useConcierge } from "./concierge/concierge-provider";
 import NavMegaMenu from "./nav-mega-menu";
 import { CORPORATE_URL } from "@/lib/site";
@@ -118,13 +119,8 @@ export default function SiteNavClient({ trips, links, mobileLinks }) {
         }`}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="YaadiGo home">
-            <span className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-accent">
-              <LogoMark />
-            </span>
-            <span className="font-display text-[19px] font-extrabold tracking-tight text-paper-text">
-              YaadiGo
-            </span>
+          <Link href="/" className="flex shrink-0 items-center" aria-label="YaadiGo home">
+            <BrandLogo height={50} priority />
           </Link>
 
           <nav

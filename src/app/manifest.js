@@ -26,8 +26,10 @@ export default function manifest() {
     theme_color: "#f5f3ee",
     lang: "en-IN",
     categories: ["travel", "lifestyle"],
+    // Android wants 192 and 512 PNGs for the home screen and splash.
     icons: [
-      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
+      { src: "/brand/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/brand/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
     ],
   };
 }

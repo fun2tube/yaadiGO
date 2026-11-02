@@ -13,12 +13,12 @@ import {
   RerouteIcon,
   PulseIcon,
   SparkleIcon,
-  LogoMark,
   ChevronIcon,
   CalendarIcon,
   ImageIcon,
   GridIcon,
 } from "@/components/icons";
+import BrandLogo from "@/components/brand-logo";
 import { userCan } from "@/lib/crm/schema";
 import NotificationBell from "@/components/cms/notification-bell";
 
@@ -103,15 +103,10 @@ export default function AdminNav({ user, unread = 0 }) {
     <>
       {/* Desktop sidebar */}
       <aside className="sticky top-0 hidden h-dvh w-52 shrink-0 flex-col gap-1 border-r border-paper-line py-6 lg:flex">
-        <Link href="/admin" className="mb-6 flex items-center gap-2.5 px-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent">
-            <LogoMark />
-          </span>
-          <span className="flex flex-col leading-none">
-            <span className="font-display text-[15px] font-bold text-paper-text">YaadiGo</span>
-            <span className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-paper-text-faint">
-              Admin
-            </span>
+        <Link href="/admin" className="mb-6 flex items-center gap-2.5 px-3" aria-label="YaadiGo admin home">
+          <BrandLogo height={40} />
+          <span className="font-mono text-[9px] uppercase leading-none tracking-[0.14em] text-paper-text-faint">
+            Admin
           </span>
         </Link>
 
@@ -153,10 +148,8 @@ export default function AdminNav({ user, unread = 0 }) {
 
       {/* Mobile header */}
       <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between border-b border-paper-line bg-paper/95 px-4 py-3 backdrop-blur-xl lg:hidden">
-        <Link href="/admin" className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent">
-            <LogoMark />
-          </span>
+        <Link href="/admin" className="flex items-center gap-2" aria-label="YaadiGo admin home">
+          <BrandLogo height={30} />
           <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper-text-faint">
             Admin
           </span>

@@ -1,5 +1,5 @@
 import Img from "@/components/img";
-import { LogoMark } from "@/components/icons";
+import BrandLogo from "@/components/brand-logo";
 import { money, QUOTE_LINE_KINDS } from "@/lib/crm/schema";
 import { paymentSchedule } from "@/lib/crm/quote-content";
 import { hasContent } from "@/lib/slot-text";
@@ -48,16 +48,11 @@ export function QuoteImage({ id, url, alt, className = "", sizes }) {
 export function Letterhead({ quotation }) {
   return (
     <header className="flex items-start justify-between gap-4 border-b border-paper-line pb-5">
-      <div className="flex items-center gap-3">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent">
-          <LogoMark />
-        </span>
-        <div>
-          <p className="font-display text-[19px] font-bold leading-none text-paper-text">YaadiGo</p>
-          <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-paper-text-faint">
-            {REGISTRATION?.legalName ?? "Travel"}
-          </p>
-        </div>
+      <div className="flex flex-col items-start gap-1.5">
+        <BrandLogo height={52} forPrint />
+        <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-paper-text-faint">
+          {REGISTRATION?.legalName ?? "Travel"}
+        </p>
       </div>
       <div className="text-right">
         <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-paper-text-faint">

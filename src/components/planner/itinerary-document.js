@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 import DayCard from "./day-card";
 import { ItineraryHeader, ItineraryTail, AI_DISCLAIMER } from "./itinerary-parts";
-import { LogoMark } from "@/components/icons";
+import BrandLogo from "@/components/brand-logo";
 import { CONTACT } from "@/lib/site";
 
 const noopSubscribe = () => () => {};
@@ -41,12 +41,7 @@ export default function ItineraryDocument() {
   return (
     <article data-pdf-ready className="flex flex-col gap-5">
       <header className="flex items-center justify-between border-b border-paper-line pb-4">
-        <span className="flex items-center gap-2.5">
-          <span className="flex h-[30px] w-[30px] items-center justify-center rounded-[9px] bg-accent">
-            <LogoMark />
-          </span>
-          <span className="font-display text-[20px] font-bold text-paper-text">YaadiGo</span>
-        </span>
+        <BrandLogo height={44} forPrint />
         <span className="text-right text-[11.5px] leading-snug text-paper-text-faint">
           Trip plan · {today}
           {CONTACT.phone && <span className="block">{CONTACT.phone}</span>}

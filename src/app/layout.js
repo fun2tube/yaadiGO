@@ -70,7 +70,8 @@ const organizationSchema = {
   name: SITE_NAME,
   legalName: ORG_LEGAL_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/icon.svg`,
+  // Google wants a raster logo, at least 112 px.
+  logo: `${SITE_URL}/brand/yaadigo-logo.png`,
   image: `${SITE_URL}/opengraph-image`,
   ...(CONTACT.email ? { email: CONTACT.email } : {}),
   ...(CONTACT.phoneHref ?? CONTACT.phone

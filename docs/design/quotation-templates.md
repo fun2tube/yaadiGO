@@ -55,7 +55,7 @@ reads as careless.
 - **Hotel and flight images** are pasted URLs for now. There is no file upload
   because there is no object storage yet — that arrives with Supabase Storage.
   The field says "paste a link" rather than pretending a picker exists.
-- **The logo** is the existing `LogoMark`, inline SVG, so it prints crisply.
+- **The logo** is `BrandLogo` (`public/brand/yaadigo-logo.png`, the owner's logo, transparent PNG), 52 px tall on the letterhead.
 
 A missing image must never leave a broken frame or an empty box. Blocks with no
 image collapse entirely — an absent hotel photo should look like a decision,

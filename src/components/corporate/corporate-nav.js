@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { LogoMark, ChevronIcon } from "@/components/icons";
+import { ChevronIcon } from "@/components/icons";
+import BrandLogo from "@/components/brand-logo";
 import { SITE_URL } from "@/lib/site";
 
 const SECTIONS = [
@@ -37,17 +38,12 @@ export default function CorporateNav() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3 sm:px-10">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5">
-          <span className="flex h-[30px] w-[30px] items-center justify-center rounded-[9px] bg-accent">
-            <LogoMark />
-          </span>
-          <span className="flex flex-col leading-none">
-            <span className="font-display text-[17px] font-black tracking-tight text-ink-text">
-              YaadiGo
-            </span>
-            <span className="mt-0.5 text-[9px] font-black uppercase tracking-[0.16em] text-accent">
-              For Corporate
-            </span>
+        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="YaadiGo home">
+          <BrandLogo height={34} onDark />
+          {/* Phones drop it: beside the logo it squeezed "Talk to the desk"
+              onto two lines, and the hero's eyebrow says it just below. */}
+          <span className="hidden text-[9px] font-black uppercase leading-none tracking-[0.16em] text-accent sm:inline">
+            For Corporate
           </span>
         </Link>
 
