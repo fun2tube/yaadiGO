@@ -19,6 +19,7 @@ import {
   GridIcon,
   LinkIcon,
   StarIcon,
+  HotelIcon,
 } from "@/components/icons";
 import BrandLogo from "@/components/brand-logo";
 import { userCan } from "@/lib/crm/schema";
@@ -42,6 +43,8 @@ const TABS = [
   // Group tours AND customized trips — one catalogue to the person keeping it
   // up to date. The old "Places" screen redirects here.
   { href: "/admin/trips", label: "Trips", Icon: CompassIcon, permission: "catalogue.read" },
+  // Sales price stays from the rate cards, so quotation builders see it too.
+  { href: "/admin/hotels", label: "Hotels", Icon: HotelIcon, permission: "catalogue.read", alsoPermission: ["quotations.read"] },
   // Every batch of every group trip: seats, holds, waitlist, traveller list.
   { href: "/admin/departures", label: "Departures", Icon: CalendarIcon, permission: "bookings.read" },
   // Secondary, not a primary tab: building pages is an occasional job, and the

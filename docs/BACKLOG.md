@@ -298,6 +298,9 @@ Code items #154–#168 were fixed 2026-10-14 and moved to Done. What is left nee
 | 197 | Merge two customer records of one person (moves leads, keeps the older record, logs it) (F3) | S3 | DevOps | Merge on the customer page; history shows both |
 | 198 | One source for "collected": lead page uses booking.collected, customer page the payments ledger (F4) | S3 | DevOps | Both pages read the ledger |
 | 199 | Customer stats in SQL instead of in-memory joins (F5), before Phase 2's agent queries | S4 | DevOps | /admin/customers under 300 ms at 10k customers |
+| 200 | Fill the quotation's "Where you stay" block from its hotel lines (directory hotels carry name, town, nights, room type) so the two can't disagree (review 2026-11-02-hotels, F2) | S3 | DevOps | Adding a directory hotel adds it to Where you stay |
+| 201 | Database-level no-overlap for hotel rates: `btree_gist` exclusion constraint on (hotel, room type, meal plan, daterange) (F3) | S3 | DevOps | Two overlapping inserts in one second: one refused by Postgres |
+| 202 | Use extra-bed / child prices in the quote hotel picker (F5) | S4 | DevOps | A family of 3 in one room prices the extra bed |
 | 191 | Get the logo as a vector (SVG/AI/PDF) or a ≥2000 px PNG from its designer. The supplied file is 400×400 and slightly JPEG-soft: fine on screen, not for banners or print (review 2026-11-02-brand-logo, F2) | S3 | You | `public/brand/` regenerated from the original |
 
 ## Done

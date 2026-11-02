@@ -806,6 +806,89 @@ export const notifications = pgTable(
 );
 
 // ---------------------------------------------------------------------------
+// Hotels and their rate cards (docs/design/ai-cofounder.md §2, phase 1c)
+// ---------------------------------------------------------------------------
+
+/**
+ * A property we book: the supplier, its contact, its standard. Rates hang off
+ * it by room type, meal plan and season, so a quotation can price a stay
+ * from what was actually agreed with the hotel instead of from memory.
+ */
+export const hotels = pgTable(
+  "hotels",
+  {
+    id: id(),
+    name: text("name").notNull(),
+    // The place it is in, as the trips name it ("Kashmir", "Spiti"). A link to
+    // a destinations table comes when destinations move out of code (1d).
+    destination: text("destination").notNull(),
+    city: text("city"),
+    // hotel | resort | homestay | houseboat | camp | villa | guesthouse
+    category: text("category").notNull().default("hotel"),
+    stars: integer("stars"),
+    address: text("address"),
+    contactPerson: text("contact_person"),
+    phone: text("phone"),
+    email: text("email"),
+    website: text("website"),
+    notes: text("notes"),
+    // A media library id, for quotations that show the property.
+    imageId: text("image_id"),
+    active: boolean("active").notNull().default(true),
+    ...timestamps,
+  },
+  (t) => [
+    index("hotels_destination_idx").on(t.destination),
+    // One record per property: "Hotel Deyzor" in Kaza entered twice would
+    // split its rates across two rows.
+    uniqueIndex("hotels_name_place_unique").on(sql`lower(${t.name})`, sql`lower(coalesce(${t.city}, ${t.destination}))`),
+    check("hotels_stars_range", sql`${t.stars} is null or ${t.stars} between 1 and 5`),
+  ]
+);
+
+/**
+ * One price: a room type, a meal plan, a date range, what we pay and what we
+ * sell at, per room per night. Overlapping ranges for the same room and plan
+ * are refused in lib/cms/hotels.js, because two prices for one night would
+ * make a quotation depend on which row was read first.
+ */
+export const hotelRates = pgTable(
+  "hotel_rates",
+  {
+    id: id(),
+    hotelId: text("hotel_id")
+      .notNull()
+      .references(() => hotels.id, { onDelete: "cascade" }),
+    roomType: text("room_type").notNull(),
+    // EP room only · CP breakfast · MAP breakfast + one meal · AP all meals
+    mealPlan: text("meal_plan").notNull(),
+    season: text("season"),
+    validFrom: date("valid_from").notNull(),
+    validTo: date("valid_to").notNull(),
+    costPaise: bigint("cost_paise", { mode: "bigint" }).notNull(),
+    sellPaise: bigint("sell_paise", { mode: "bigint" }).notNull(),
+    extraBedCostPaise: bigint("extra_bed_cost_paise", { mode: "bigint" }),
+    extraBedSellPaise: bigint("extra_bed_sell_paise", { mode: "bigint" }),
+    notes: text("notes"),
+    ...timestamps,
+  },
+  (t) => [
+    index("hotel_rates_hotel_idx").on(t.hotelId, t.validFrom),
+    check("hotel_rates_meal_plan", sql`${t.mealPlan} in ('EP', 'CP', 'MAP', 'AP')`),
+    check("hotel_rates_dates", sql`${t.validTo} >= ${t.validFrom}`),
+    check("hotel_rates_cost_not_negative", sql`${t.costPaise} >= 0`),
+    // Selling a room below what it costs us is a mistake, never a strategy
+    // worth allowing silently. A real loss-leader goes in as a discount on
+    // the quotation, where it shows.
+    check("hotel_rates_sell_covers_cost", sql`${t.sellPaise} >= ${t.costPaise}`),
+    check(
+      "hotel_rates_extra_bed",
+      sql`${t.extraBedCostPaise} is null or ${t.extraBedSellPaise} is null or ${t.extraBedSellPaise} >= ${t.extraBedCostPaise}`
+    ),
+  ]
+);
+
+// ---------------------------------------------------------------------------
 // Visitor analytics — first-party and anonymous (docs/design/ai-cofounder.md)
 // ---------------------------------------------------------------------------
 

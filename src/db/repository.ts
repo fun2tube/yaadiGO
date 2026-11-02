@@ -80,6 +80,14 @@ const TABLES = {
     money: {},
     dates: ["firstSeenAt", "consentAt"],
   },
+  hotels: { table: schema.hotels, money: {}, dates: [] },
+  // validFrom/validTo are `date` columns: YYYY-MM-DD strings, never converted
+  // (see the note on leads above).
+  hotelRates: {
+    table: schema.hotelRates,
+    money: { cost: "costPaise", sell: "sellPaise", extraBedCost: "extraBedCostPaise", extraBedSell: "extraBedSellPaise" },
+    dates: [],
+  },
   invoices: {
     table: schema.invoices,
     money: {

@@ -15,6 +15,7 @@ import {
 } from "@/lib/crm/brief";
 import { QUOTE_LINE_KINDS, money } from "@/lib/crm/schema";
 import { AlertIcon, CheckIcon, SparkleIcon, ChevronIcon } from "@/components/icons";
+import HotelLinePicker from "@/components/cms/hotel-line-picker";
 
 /**
  * The quotation builder.
@@ -350,6 +351,7 @@ export default function QuoteBuilder({ lead, existing, autoDraft = false }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
   const [saved, setSaved] = useState(null);
+  const [pickingHotel, setPickingHotel] = useState(false);
   const totalsRef = useRef(null);
 
   const totals = useMemo(
@@ -626,14 +628,41 @@ export default function QuoteBuilder({ lead, existing, autoDraft = false }) {
       <section>
         <div className="flex items-center justify-between">
           <h2 className={label}>What it is made of</h2>
-          <button
-            type="button"
-            onClick={() => set({ lines: [...form.lines, emptyLine()] })}
-            className="text-[12.5px] font-bold text-accent-deep"
-          >
-            + Add line
-          </button>
+          <span className="flex gap-4">
+            <button
+              type="button"
+              onClick={() => setPickingHotel(true)}
+              className="text-[12.5px] font-bold text-accent-deep"
+            >
+              + Hotel from directory
+            </button>
+            <button
+              type="button"
+              onClick={() => set({ lines: [...form.lines, emptyLine()] })}
+              className="text-[12.5px] font-bold text-accent-deep"
+            >
+              + Add line
+            </button>
+          </span>
         </div>
+        {pickingHotel && (
+          <div className="mt-2">
+            <HotelLinePicker
+              destination={form.destination}
+              defaultCheckIn={lead.departureDate ?? ""}
+              onClose={() => setPickingHotel(false)}
+              onAdd={(line) => {
+                // Replace the untouched starter line rather than leave a blank under it.
+                const blank = (l) => !l.label && !l.unitPrice && !l.unitCost;
+                setForm((prev) => ({
+                  ...prev,
+                  lines: [...prev.lines.filter((l) => !blank(l)), line],
+                }));
+                setPickingHotel(false);
+              }}
+            />
+          </div>
+        )}
         <div className="mt-2 flex flex-col gap-2">
           {form.lines.map((line, index) => (
             <LineRow
