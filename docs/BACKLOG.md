@@ -269,7 +269,6 @@ Code items #154–#168 were fixed 2026-10-14 and moved to Done. What is left nee
 
 | # | Task | Sev | Role | Done when |
 |---|---|---|---|---|
-| 157 | **Deploy the app to the domain (F9)** — Vercel with production env (incl. `COMPANY_GSTIN`); `www` and `corporate` DNS; then #145/#146 | **S1** | DevOps + You | `www.yaadigo.com/group-tours` serves the trip list, not "Coming Soon" |
 | 169 | **Apply migration 0005 to Supabase** (`npm run db:migrate`): `accounts` role, `credit_notes`, invoice SAC/split/state code. Until then Accounts invites fail on Postgres and credit notes cannot be issued | **S1** | You | `select unnest(enum_range(null::role))` lists accounts; a credit note issues on the live DB |
 | 170 | **Company GSTIN** — set `COMPANY_GSTIN` on the host (or `REGISTRATION.gstin`); invoices are refused until then (#89) | **S1** | You | Invoices desk shows "Raise invoice" |
 | 171 | Check the live DB for invoices issued before 2026-10-14 without GSTIN/SAC; credit-note and re-issue them | S2 | You + Accounts | None left without a GSTIN |
@@ -278,21 +277,26 @@ Code items #154–#168 were fixed 2026-10-14 and moved to Done. What is left nee
 | 173 | Have the CA confirm SAC 998555, 5% without ITC, and the place-of-supply default (supplier's state for unregistered customers) | S2 | You | Written confirmation |
 | 53 | Second AI provider key — Gemini returned 503 on two models during every test today; the quote draft now times out cleanly instead of hanging | S2 | You | `AI_PROVIDER=groq` set, draft < 30 s |
 | 174 | Kashmir Valley Escape: text for days 2–7; confirm `@yaadigo.in` addresses on a `yaadigo.com` site | S4 | You | Done |
-| 175 | **Supabase Storage keys for photo uploads** — `SUPABASE_URL` (https://fgffhgstimvluokewukm.supabase.co) + `SUPABASE_SERVICE_ROLE_KEY` on the host; the `media` bucket is created on first upload. Then upload one photo on the live site | **S1** (go-live) | You → DevOps | A photo uploaded on the deployed site shows on a customer quotation |
 | 176 | Tick "Quotations" (read) for existing Operations users in Team — the preset now includes it for new ones | S3 | You | Ops opens the register |
 | 177 | Decide whether Sales should see the whole-team scorecard in Reports (they hold `reports.read`) | S3 | You | Decided |
 | 178 | Record `lostAt` when a lead is marked lost (reports use the last update today) | S4 | DevOps | Lost-in-period counts by the date it was lost |
-| 179 | **Live database unreachable**: Supabase answers `tenant/user postgres.fgffhgstimvluokewukm not found` for every query, so every DB page returns 500. Check whether the project is paused or deleted, or the password changed, and update `DATABASE_URL` (review 2026-11-02-for-corporate-tab, F1) | **S1** | You | `/` renders against the real `DATABASE_URL` |
 | 180 | If a menu was saved in Admin → Navigation, add "For Corporate" (`/corporate`) to its phone extras. The saved menu overrides the coded one (F2) | S2 | You | Phone menu lists For Corporate on the live DB |
 | 181 | Choose one corporate page: `/corporate` (lead form) or `/corporate-travel` (CMS). Redirect the other (F3) | S3 | CTO + You | One corporate URL in the sitemap |
 | 182 | Check saved page edits on `/contact` and `/corporate-travel` for "Corporate Travel Desk" and rename them to For Corporate (F4) | S3 | You | No "Corporate Desk" wording on the live site |
-| 184 | **Nightly Postgres backups off the VPS**: the database now lives on one machine (docs/deploy-vps.md). Schedule `pg_dump` and copy it to storage on another machine | **S1** | DevOps | A restore from last night's dump works on a scratch database |
+| 184 | **Copy the nightly backups off the VPS.** Nightly dumps and the weekly restore check run on the server (review 2026-11-02-vps-deploy-and-backups, F1) but sit on the same machine. Pick a destination (cloud storage or another machine) and copy `/root/yaadigo-backups` there nightly | **S1** | You → DevOps | Last night's dump is on another machine and restores there |
 | 183 | Fix the failing `trip-seats.test.js` › "the editor cannot shrink a batch below what is booked" (F5) | S2 | DevOps | vitest all green |
+| 185 | Alert when a nightly backup or the weekly restore check fails. Today cron logs to `/var/log/yaadigo-backup.log` and nobody reads it (F2) | S2 | DevOps | A stopped `yaadigo-db` produces an alert the owner sees |
+| 186 | Read the first Sunday `restore-check` after real data exists: restored row counts must be non-zero and close to live (F3) | S2 | DevOps | Log shows non-zero restored rows |
+| 187 | Razorpay webhook: register `https://www.yaadigo.com/api/webhooks/razorpay` in the dashboard and put its secret in `/root/yaadigo.env` as `RAZORPAY_WEBHOOK_SECRET`, then `setup-vps.sh app` (F5) | S2 | You → DevOps | A test payment marks the booking paid |
+| 188 | Zero-downtime deploys: start the new container beside the old one and switch, instead of recreating in place (F6) | S3 | DevOps | `app` serves no 502 during a deploy |
+| 189 | Once `corporate.yaadigo.com` has a DNS A record → 72.60.202.179, add it to `HOSTS` in `setup-vps.sh` and run `cutover` (F7) | S3 | You → DevOps | https://corporate.yaadigo.com shows the corporate page |
+| 190 | First live use, by the owner: sign in and change the password, add one trip, send one enquiry, upload one photo, print one quotation PDF (PM review) | **S1** (go-live) | You | Each works on www.yaadigo.com |
 
 ## Done
 
 | Task | Finding | Closed |
 |---|---|---|
+| **Deployed to the Hostinger VPS** as Docker containers behind the box's shared nginx-proxy, with Postgres 17 on the server (new, empty DB) and nightly backups plus a weekly restore check. Closes #157 (deploy), #179 (Supabase unreachable) and #175 (photos now go to the server's `uploads` volume). Review 2026-11-02-vps-deploy-and-backups | User request | 2026-11-02 |
 | **"For Corporate" tab**: header, phone menu and footer link to the existing `/corporate` lead page (the subdomain had no DNS, so "For business" went nowhere); segment renamed to For Corporate everywhere a visitor sees it | User request | 2026-11-02 |
 | **Media library + quotation register + reports** — photo library with upload (shrunk in the browser, type checked by bytes) and a picker on every image slot in a quotation (cover, hotels, flights, activities, stay/transport galleries, route map); staff preview for drafts (the 404); quotation register with periods, filters, KPIs, charts, CSV, ops read-only; reports rebuilt (any period, like-for-like comparison, funnel, 12-month trend, team scorecard + CSV, sources, destinations, integrity incl. duplicate bookings); More sheet on the phone nav (six sections were unreachable); slim price bar | User request | 2026-10-14 |
 | **#154–#168 from the function test**: one booking per lead (quote approval updates the seat request), approval → `requested`, one advance rule (schedule row 1), balance row a remainder; Record a payment + ledger; GST invoices (GSTIN gate, SAC, place of supply, CGST/SGST/IGST, invoice page, credit notes); quote builder defaults, Days label, URL, frozen buttons; seat requests pre-fill the brief; WhatsApp normaliser everywhere; bookings scoped to the salesperson; invoices only for sold bookings; no editor bar in admin; planner reads "N days"; IST day buckets; ended departures leave Upcoming; image quality 78; test timeouts | Function test | 2026-10-14 |
