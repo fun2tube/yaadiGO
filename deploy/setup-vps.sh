@@ -29,7 +29,9 @@ OLD_CONTAINER=yaadigo-frontend
 BACKUP_DIR=/root/yaadigo-backups
 
 log() { printf '\n\033[1m== %s\033[0m\n' "$*"; }
-compose() { DB_PASSWORD_FILE="$DB_PASSWORD_FILE" docker compose -f "$APP_DIR/deploy/docker-compose.yml" "$@"; }
+# This box has the standalone docker-compose v2 binary, not the CLI plugin.
+if docker compose version >/dev/null 2>&1; then COMPOSE=(docker compose); else COMPOSE=(docker-compose); fi
+compose() { DB_PASSWORD_FILE="$DB_PASSWORD_FILE" "${COMPOSE[@]}" -f "$APP_DIR/deploy/docker-compose.yml" "$@"; }
 
 # GET a path from inside the app container (the image has no curl).
 probe() {
@@ -45,7 +47,7 @@ inspect() {
   log "System"
   hostname; grep PRETTY_NAME /etc/os-release || true
   free -h | sed -n 2p; df -h / | tail -1; echo "cpus: $(nproc)"
-  docker version --format 'docker {{.Server.Version}}'; docker compose version
+  docker version --format 'docker {{.Server.Version}}'; "${COMPOSE[@]}" version
   log "Containers"
   docker ps -a --format '{{.Names}}\t{{.Image}}\t{{.Status}}'
   log "Who serves yaadigo.com"
