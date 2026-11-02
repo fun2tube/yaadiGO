@@ -291,6 +291,9 @@ Code items #154–#168 were fixed 2026-10-14 and moved to Done. What is left nee
 | 188 | Zero-downtime deploys: start the new container beside the old one and switch, instead of recreating in place (F6) | S3 | DevOps | `app` serves no 502 during a deploy |
 | 189 | Once `corporate.yaadigo.com` has a DNS A record → 72.60.202.179, add it to `HOSTS` in `setup-vps.sh` and run `cutover` (F7) | S3 | You → DevOps | https://corporate.yaadigo.com shows the corporate page |
 | 190 | First live use, by the owner: sign in and change the password, add one trip, send one enquiry, upload one photo, print one quotation PDF (PM review) | **S1** (go-live) | You | Each works on www.yaadigo.com |
+| 193 | Country and city for visits via MaxMind GeoLite2 (free account), looked up then the IP dropped. Time zone is only a country proxy today (review 2026-11-02-visitor-analytics, F4) | S3 | You → DevOps | Traffic shows visits by country and city |
+| 194 | "Don't count this device" switch in admin for staff phones that browse the site signed out (F5) | S3 | DevOps | A flagged browser sends no beacons |
+| 195 | Analytics rollups + 13-month raw retention (F6) | S4 | DevOps | Traffic page reads rollups; raw rows older than 13 months deleted nightly |
 | 191 | Get the logo as a vector (SVG/AI/PDF) or a ≥2000 px PNG from its designer. The supplied file is 400×400 and slightly JPEG-soft: fine on screen, not for banners or print (review 2026-11-02-brand-logo, F2) | S3 | You | `public/brand/` regenerated from the original |
 
 ## Done

@@ -9,6 +9,7 @@ import {
   callOutcome,
 } from "@/lib/crm/schema";
 import { emit, timelineFor } from "@/lib/crm/events";
+import { currentVisitId, trackServerEvent } from "@/lib/analytics/visit";
 import { normaliseBrief, briefGaps, briefSummary, travellerSummary } from "@/lib/crm/brief";
 
 /**
@@ -183,10 +184,16 @@ export function estimateLeadValue(enquiry) {
 }
 
 export async function captureLead(enquiry) {
+  // The website visit this enquiry came from, if any: what ties the lead (and
+  // later the booking's money) to the channel that brought the customer.
+  const visitId = enquiry.visitId ?? (await currentVisitId());
+  const source = enquiry.source ?? "unknown";
+
   // A repeat enquiry becomes an interaction on the lead that already exists,
   // never a second lead.
   const duplicate = await findRecentDuplicate(enquiry);
   if (duplicate) {
+    await trackServerEvent(visitId, "enquiry_submitted", { form: source, repeat: true });
     const summary = [enquiry.destination, enquiry.dates, enquiry.message]
       .filter(Boolean)
       .join(" · ")
@@ -229,6 +236,7 @@ export async function captureLead(enquiry) {
 
   const lead = await createRecord(LEADS, {
     ...enquiry,
+    visitId,
     status: "new",
     ownerId,
     notes: [],
@@ -266,6 +274,8 @@ export async function captureLead(enquiry) {
   if (ownerId) {
     await emit("lead.assigned", contactOf(lead), { leadId: lead.id, ownerId });
   }
+
+  await trackServerEvent(visitId, "enquiry_submitted", { form: source, leadId: lead.id });
 
   return lead;
 }

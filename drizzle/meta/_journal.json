@@ -43,6 +43,13 @@
       "when": 1791989119633,
       "tag": "0005_gst_invoices_accounts_role",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793633705145,
+      "tag": "0006_visitor_analytics",
+      "breakpoints": true
     }
   ]
 }

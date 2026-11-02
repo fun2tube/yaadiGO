@@ -17,6 +17,7 @@ import {
   CalendarIcon,
   ImageIcon,
   GridIcon,
+  LinkIcon,
 } from "@/components/icons";
 import BrandLogo from "@/components/brand-logo";
 import { userCan } from "@/lib/crm/schema";
@@ -50,6 +51,7 @@ const TABS = [
   // invoice gone out?" without asking accounts. Only ISSUING is restricted.
   { href: "/admin/invoices", label: "Invoices", Icon: ReceiptIcon, permission: "bookings.read" },
   { href: "/admin/reports", label: "Reports", Icon: PulseIcon, permission: "reports.read" },
+  { href: "/admin/traffic", label: "Traffic", Icon: LinkIcon, permission: "reports.read" },
   { href: "/admin/team", label: "Team", Icon: UsersIcon, permission: "team.read" },
 ];
 

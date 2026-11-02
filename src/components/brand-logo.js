@@ -1,5 +1,4 @@
 import Image from "next/image";
-import logo from "../../public/brand/yaadigo-logo.png";
 
 /**
  * The YaadiGo logo as the owner supplied it (2026-11-02): the car over the
@@ -12,7 +11,14 @@ import logo from "../../public/brand/yaadigo-logo.png";
  * Documents that become PDFs pass `forPrint`: headless Chromium renders at
  * 1x, so the optimiser handed it a 96 px logo that printed soft. Print gets
  * the original 388 px file instead.
+ *
+ * A path and stated size rather than a static `import`: the test bundler
+ * turns an imported PNG into a bare string with no dimensions, which made
+ * every quotation template throw under test.
  */
+const SRC = "/brand/yaadigo-logo.png";
+const NATURAL = { width: 388, height: 222 };
+
 export default function BrandLogo({
   height = 44,
   onDark = false,
@@ -20,13 +26,13 @@ export default function BrandLogo({
   forPrint = false,
   className = "",
 }) {
-  const width = Math.round((logo.width / logo.height) * height);
+  const width = Math.round((NATURAL.width / NATURAL.height) * height);
   return (
     <span
       className={`inline-flex shrink-0 ${onDark ? "rounded-[10px] bg-white px-2 py-1" : ""} ${className}`}
     >
       <Image
-        src={logo}
+        src={SRC}
         alt="YaadiGo"
         width={width}
         height={height}

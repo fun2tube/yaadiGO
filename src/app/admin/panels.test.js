@@ -164,6 +164,7 @@ const PANELS = [
   ["Operations", () => import("./(signed-in)/operations/page.js"), {}],
   ["Invoices", () => import("./(signed-in)/invoices/page.js"), {}],
   ["Reports", () => import("./(signed-in)/reports/page.js"), { searchParams: Promise.resolve({}) }],
+  ["Traffic", () => import("./(signed-in)/traffic/page.js"), { searchParams: Promise.resolve({ period: "30d" }) }],
   ["Team", () => import("./(signed-in)/team/page.js"), {}],
   ["Trips", () => import("./(signed-in)/trips/page.js"), { searchParams: Promise.resolve({}) }],
   ["Trips — customized filter", () => import("./(signed-in)/trips/page.js"), { searchParams: Promise.resolve({ kind: "customized" }) }],

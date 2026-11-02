@@ -54,7 +54,9 @@ const sections = [
   {
     heading: "Cookies and analytics",
     paragraphs: [
-      "This website does not set advertising or tracking cookies. Fonts are loaded from Google Fonts, which means your browser makes a request to Google's servers to fetch them; no identifier is set by us in that request.",
+      "This website does not set advertising cookies and shares nothing with ad networks or analytics companies.",
+      "To understand how the site is used, we count visits ourselves, on our own server. Your browser keeps two random identifiers (one in its storage, one in a cookie called yg_sid that expires after 30 minutes without activity), so we can tell a returning visitor from a new one and which pages a visit included. With each page we record the address, the site you came from, any campaign tag in the link, your device type, browser, language and time zone, how long the page was open and how far you scrolled. We do not record your IP address, and none of this is linked to your name or number unless you send us an enquiry, in which case the enquiry notes which visit it came from so we know which of our pages and channels work. Clearing your browser storage removes the identifiers.",
+      "Fonts are loaded from Google Fonts, which means your browser makes a request to Google's servers to fetch them; no identifier is set by us in that request.",
     ],
   },
   {

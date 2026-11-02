@@ -250,6 +250,10 @@ export const leads = pgTable(
     itinerary: jsonb("itinerary"),
 
     source: text("source").notNull().default("unknown"),
+    // The website visit the enquiry came from (lib/analytics), which is what
+    // ties a booking's money back to the channel that brought the customer.
+    // Null for leads from the phone, walk-ins and anything before tracking.
+    visitId: text("visit_id").references((): AnyPgColumn => visits.id, { onDelete: "set null" }),
     status: leadStageEnum("status").notNull().default("new"),
     lostReason: text("lost_reason"),
 
@@ -752,6 +756,107 @@ export const notifications = pgTable(
     ...timestamps,
   },
   (t) => [index("notifications_user_idx").on(t.userId, t.read, t.createdAt)]
+);
+
+// ---------------------------------------------------------------------------
+// Visitor analytics — first-party and anonymous (docs/design/ai-cofounder.md)
+// ---------------------------------------------------------------------------
+
+/**
+ * One visit: a browser's run of pages with no gap longer than 30 minutes.
+ *
+ * Anonymous by construction. The ids are random values the browser made up;
+ * no name, phone, email or IP address is ever stored here. The IP is used
+ * only for rate limiting and is never written. Channel and source are
+ * classified once, on arrival (lib/analytics/classify.js), so every report
+ * groups the same way.
+ */
+export const visits = pgTable(
+  "visits",
+  {
+    // Made by the browser (crypto.randomUUID) so the pageview beacon can name
+    // its visit without a round trip.
+    id: text("id").primaryKey(),
+    visitorId: text("visitor_id").notNull(),
+    newVisitor: boolean("new_visitor").notNull().default(true),
+    startedAt: timestamp("started_at", { withTimezone: true }).notNull().defaultNow(),
+    lastSeenAt: timestamp("last_seen_at", { withTimezone: true }).notNull().defaultNow(),
+
+    landingPath: text("landing_path").notNull(),
+    referrerHost: text("referrer_host"),
+    // organic | ai | social | paid | email | referral | direct
+    channel: text("channel").notNull(),
+    // google, chatgpt, instagram, a newsletter name… what the channel was.
+    source: text("source").notNull(),
+    utmSource: text("utm_source"),
+    utmMedium: text("utm_medium"),
+    utmCampaign: text("utm_campaign"),
+    utmTerm: text("utm_term"),
+    utmContent: text("utm_content"),
+
+    device: text("device").notNull(), // mobile | tablet | desktop
+    browser: text("browser"),
+    os: text("os"),
+    // A country proxy that needs no IP lookup: Asia/Kolkata, Asia/Dubai…
+    timezone: text("timezone"),
+    language: text("language"),
+
+    pageviews: integer("pageviews").notNull().default(0),
+  },
+  (t) => [
+    index("visits_started_idx").on(t.startedAt),
+    index("visits_channel_idx").on(t.channel, t.startedAt),
+    index("visits_visitor_idx").on(t.visitorId),
+    check("visits_pageviews_not_negative", sql`${t.pageviews} >= 0`),
+  ]
+);
+
+/** One page seen within a visit, with how long and how far down. */
+export const pageviews = pgTable(
+  "pageviews",
+  {
+    // Browser-made too: the leave beacon updates this row by id.
+    id: text("id").primaryKey(),
+    visitId: text("visit_id")
+      .notNull()
+      .references(() => visits.id, { onDelete: "cascade" }),
+    // Normalised: no query string, and share tokens replaced (/q/:token), so
+    // a pageview can never leak a link that opens a customer's quotation.
+    path: text("path").notNull(),
+    at: timestamp("at", { withTimezone: true }).notNull().defaultNow(),
+    // Time the tab was visible, and the deepest scroll (0-100). Null until the
+    // visitor leaves the page, and stays null if the browser never says so.
+    durationMs: integer("duration_ms"),
+    maxScroll: integer("max_scroll"),
+  },
+  (t) => [
+    index("pageviews_visit_idx").on(t.visitId),
+    index("pageviews_path_idx").on(t.path, t.at),
+    index("pageviews_at_idx").on(t.at),
+    check("pageviews_scroll_range", sql`${t.maxScroll} is null or ${t.maxScroll} between 0 and 100`),
+    check("pageviews_duration_not_negative", sql`${t.durationMs} is null or ${t.durationMs} >= 0`),
+  ]
+);
+
+/**
+ * Things a visitor did: whatsapp_clicked, call_clicked, enquiry_submitted,
+ * planner_used… The funnel the agent reads. Business events (a lead created,
+ * a payment) stay in `events`; these are the website's.
+ */
+export const siteEvents = pgTable(
+  "site_events",
+  {
+    id: id(),
+    visitId: text("visit_id").references(() => visits.id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    path: text("path"),
+    props: jsonb("props").notNull().default(sql`'{}'::jsonb`),
+    at: timestamp("at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("site_events_name_idx").on(t.name, t.at),
+    index("site_events_visit_idx").on(t.visitId),
+  ]
 );
 
 /** Site content overrides — the inline CMS. */
