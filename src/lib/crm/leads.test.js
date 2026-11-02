@@ -12,22 +12,26 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
  * capture DECISION: is this a new lead or a repeat, and what is it worth.
  */
 
-const store = { leads: [] };
+// One list per collection, as the real store keeps them: capture now writes
+// a customer as well as a lead, and the two must not land in one list.
+const store = { leads: [], customers: [] };
 const emitted = [];
+const rows = (collection) => (store[collection] ??= []);
 
 vi.mock("@/lib/cms/records", () => ({
-  createRecord: vi.fn(async (_collection, data) => {
-    const row = { id: `lead_${store.leads.length + 1}`, createdAt: new Date().toISOString(), ...data };
-    store.leads.push(row);
+  createRecord: vi.fn(async (collection, data) => {
+    const prefix = collection === "leads" ? "lead" : collection;
+    const row = { id: `${prefix}_${rows(collection).length + 1}`, createdAt: new Date().toISOString(), ...data };
+    rows(collection).push(row);
     return row;
   }),
-  updateRecord: vi.fn(async (_collection, id, patch) => {
-    const row = store.leads.find((l) => l.id === id);
+  updateRecord: vi.fn(async (collection, id, patch) => {
+    const row = rows(collection).find((l) => l.id === id);
     Object.assign(row, patch);
     return row;
   }),
-  listRecords: vi.fn(async () => store.leads),
-  getRecord: vi.fn(async (_collection, id) => store.leads.find((l) => l.id === id) ?? null),
+  listRecords: vi.fn(async (collection) => rows(collection)),
+  getRecord: vi.fn(async (collection, id) => rows(collection).find((l) => l.id === id) ?? null),
 }));
 
 vi.mock("@/lib/cms/users", () => ({
@@ -48,6 +52,7 @@ const { captureLead, estimateLeadValue } = await import("@/lib/crm/leads");
 
 beforeEach(() => {
   store.leads.length = 0;
+  store.customers.length = 0;
   emitted.length = 0;
 });
 

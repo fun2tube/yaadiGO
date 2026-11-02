@@ -145,6 +145,48 @@ const timestamps = {
 // People
 // ---------------------------------------------------------------------------
 
+/**
+ * A customer: one person (or company), however many times they enquire.
+ *
+ * Found by phone first, then email, both normalised into keys that are
+ * UNIQUE, so two enquiries from "+91 98765 43210" and "09876543210" can
+ * never become two customers, even if they arrive in the same second.
+ * The keys are what dedupe; `phone` and `email` keep what the person typed.
+ */
+export const customers = pgTable(
+  "customers",
+  {
+    id: id(),
+    name: text("name").notNull(),
+    phone: text("phone"),
+    // Last ten digits (lib/crm/contact-keys.js).
+    phoneKey: text("phone_key"),
+    email: text("email"),
+    // Lower-cased and trimmed.
+    emailKey: text("email_key"),
+    company: text("company"),
+    city: text("city"),
+    // Where we first heard from them: the first lead's source.
+    firstSource: text("first_source"),
+    firstSeenAt: timestamp("first_seen_at", { withTimezone: true }).notNull().defaultNow(),
+    tags: jsonb("tags").$type<string[]>().notNull().default(sql`'[]'::jsonb`),
+    notes: text("notes"),
+    // DPDP Act: promotional messages need recorded consent, with its date.
+    marketingConsent: boolean("marketing_consent").notNull().default(false),
+    consentAt: timestamp("consent_at", { withTimezone: true }),
+    ...timestamps,
+  },
+  (t) => [
+    uniqueIndex("customers_phone_key_unique").on(t.phoneKey),
+    uniqueIndex("customers_email_key_unique").on(t.emailKey),
+    index("customers_name_idx").on(t.name),
+    // Without a phone or an email there is nothing to recognise them by
+    // next time, and the record would be a duplicate waiting to happen.
+    check("customers_reachable", sql`${t.phoneKey} is not null or ${t.emailKey} is not null`),
+    check("customers_consent_dated", sql`not ${t.marketingConsent} or ${t.consentAt} is not null`),
+  ]
+);
+
 export const users = pgTable(
   "users",
   {
@@ -254,6 +296,10 @@ export const leads = pgTable(
     // ties a booking's money back to the channel that brought the customer.
     // Null for leads from the phone, walk-ins and anything before tracking.
     visitId: text("visit_id").references((): AnyPgColumn => visits.id, { onDelete: "set null" }),
+    // The person behind the enquiry (lib/crm/customers.js). A repeat customer
+    // is one customer with many leads, which is what makes "how many come
+    // back" and "what is a customer worth" answerable.
+    customerId: text("customer_id").references((): AnyPgColumn => customers.id, { onDelete: "set null" }),
     status: leadStageEnum("status").notNull().default("new"),
     lostReason: text("lost_reason"),
 
@@ -286,6 +332,7 @@ export const leads = pgTable(
     // The T-21 / T-7 reminder sweep filters on this; without the index it is
     // a full scan every run.
     index("leads_departure_idx").on(t.departureDate),
+    index("leads_customer_idx").on(t.customerId),
     // A lost lead must say why, or "why do we lose deals" — the question this
     // data exists to answer — is unanswerable.
     check("leads_lost_needs_reason", sql`${t.status} <> 'lost' or ${t.lostReason} is not null`),

@@ -18,6 +18,7 @@ import {
   ImageIcon,
   GridIcon,
   LinkIcon,
+  StarIcon,
 } from "@/components/icons";
 import BrandLogo from "@/components/brand-logo";
 import { userCan } from "@/lib/crm/schema";
@@ -34,6 +35,7 @@ import NotificationBell from "@/components/cms/notification-bell";
 const TABS = [
   { href: "/admin", label: "Overview", Icon: HomeIcon, exact: true, permission: null, primary: true },
   { href: "/admin/leads", label: "Leads", Icon: ChatIcon, permission: "leads.read", primary: true },
+  { href: "/admin/customers", label: "Customers", Icon: StarIcon, permission: "leads.read" },
   { href: "/admin/bookings", label: "Bookings", Icon: ReceiptIcon, permission: "bookings.read", primary: true },
   { href: "/admin/quotations", label: "Quotes", Icon: SparkleIcon, permission: "quotations.read", primary: true },
   { href: "/admin/operations", label: "Ops", Icon: RerouteIcon, permission: "bookings.read", primary: true },

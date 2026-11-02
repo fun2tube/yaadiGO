@@ -262,6 +262,29 @@ demand and seats), and run campaign experiments.
   visits. Country is derived, then the IP is dropped. A privacy-policy update
   is included.
 
+## 6a. Phase 1 build notes: departures from §2, with reasons
+
+Reading the code before building changed three things in §2.
+
+1. **Trips keep their content model, not `trip_days` rows.** Trips already
+   have a tested lifecycle (`lib/cms/trips.js`): draft, publish, versions,
+   archive with redirect. The itinerary is validated as a whole by
+   `TripContentSchema`, and nothing queries across days. So the move is
+   from `documents` jsonb to a real `trips` table. Columns cover what gets
+   queried (kind, status, title, destination, nights, price from); the
+   itinerary stays one validated jsonb, as `quotations` already do. Splitting
+   days into rows would add joins and nothing the agent needs.
+2. **Room types live on the rate row, not their own table.** A rate is
+   (hotel, room type, meal plan, season). A separate room-type table adds a
+   screen and a join for a name.
+3. **No `bookings.customer_id`.** Every booking already hangs off a lead (the
+   website, quotation and desk paths all create one), and the lead carries
+   the customer. A second link could disagree with the first.
+
+Order: **1b customers → 1c hotels and rates → 1d trips and destinations into
+tables**, each deployed on its own. 1d touches every trip page, so it ships
+alone.
+
 ## 7. Decisions for the owner
 
 1. **Which AI runs the cofounder.** The Gemini free tier is unreliable (503s,

@@ -10,6 +10,8 @@ import {
 } from "@/lib/crm/schema";
 import { emit, timelineFor } from "@/lib/crm/events";
 import { currentVisitId, trackServerEvent } from "@/lib/analytics/visit";
+import { phoneKey } from "@/lib/crm/contact-keys";
+import { customerForEnquiry } from "@/lib/crm/customers";
 import { normaliseBrief, briefGaps, briefSummary, travellerSummary } from "@/lib/crm/brief";
 
 /**
@@ -78,11 +80,6 @@ async function pickOwner() {
  * loses the lead — the caller already treats a failure here as worth telling
  * the visitor about, and everything after the record is written is a copy.
  */
-/** Digits only, last 10 — so +91 98765 43210 and 09876543210 are one person. */
-function phoneKey(phone) {
-  const digits = String(phone ?? "").replace(/\D/g, "");
-  return digits.length >= 10 ? digits.slice(-10) : null;
-}
 
 const DUPLICATE_WINDOW_DAYS = 90;
 
@@ -189,6 +186,15 @@ export async function captureLead(enquiry) {
   const visitId = enquiry.visitId ?? (await currentVisitId());
   const source = enquiry.source ?? "unknown";
 
+  // The person behind it. Never allowed to lose the lead: a customer that
+  // failed to save is recoverable later from the lead's phone and email.
+  let customerId = null;
+  try {
+    customerId = (await customerForEnquiry(enquiry))?.id ?? null;
+  } catch (error) {
+    console.error("[crm] could not link a customer:", error?.message ?? error);
+  }
+
   // A repeat enquiry becomes an interaction on the lead that already exists,
   // never a second lead.
   const duplicate = await findRecentDuplicate(enquiry);
@@ -214,6 +220,7 @@ export async function captureLead(enquiry) {
       followUpAt: new Date().toISOString(),
       // Keep anything newly supplied without overwriting what we already had.
       itinerary: enquiry.itinerary ?? duplicate.itinerary ?? null,
+      customerId: duplicate.customerId ?? customerId,
       email: duplicate.email ?? enquiry.email ?? null,
       phone: duplicate.phone ?? enquiry.phone ?? null,
     });
@@ -237,6 +244,7 @@ export async function captureLead(enquiry) {
   const lead = await createRecord(LEADS, {
     ...enquiry,
     visitId,
+    customerId,
     status: "new",
     ownerId,
     notes: [],

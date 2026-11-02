@@ -92,6 +92,14 @@ export default async function LeadPage({ params }) {
         <p className="mt-0.5 font-mono text-[10.5px] text-paper-text-faint">
           {lead.source} · owner {byId.get(lead.ownerId)?.name ?? "unassigned"}
         </p>
+        {lead.customerId ? (
+          <Link
+            href={`/admin/customers/${lead.customerId}`}
+            className="mt-1 inline-flex text-[12.5px] font-semibold text-accent-deep"
+          >
+            Everything this customer has enquired about and booked →
+          </Link>
+        ) : null}
       </header>
 
       {/* Contact first — it is why they opened this. */}

@@ -75,6 +75,11 @@ const TABLES = {
     money: { amount: "amountPaise" },
     dates: ["receivedAt"],
   },
+  customers: {
+    table: schema.customers,
+    money: {},
+    dates: ["firstSeenAt", "consentAt"],
+  },
   invoices: {
     table: schema.invoices,
     money: {
