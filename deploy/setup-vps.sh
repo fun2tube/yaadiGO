@@ -116,6 +116,15 @@ app() {
   probe /corporate || true
   probe /group-tours || true
 
+  log "Data tasks (safe to repeat)"
+  # Moves anything still defined in code into the database, and so on: see
+  # src/app/api/cron/maintenance. The secret is read inside the container.
+  docker exec yaadigo-app node -e '
+    fetch("http://127.0.0.1:3000/api/cron/maintenance", { headers: { authorization: "Bearer " + process.env.CRON_SECRET } })
+      .then(async (r) => { const b = await r.json(); console.log(r.status, JSON.stringify({ moved: b.trips?.moved?.length, skipped: b.trips?.skipped?.length, failed: b.trips?.failed ?? b.message })); process.exitCode = r.ok ? 0 : 1; })
+      .catch((e) => { console.log("maintenance failed:", e.message); process.exitCode = 1; });
+  ' || echo "Maintenance did not complete: check docker logs yaadigo-app"
+
   if [ -s "$APP_DIR/.env.routing" ]; then
     echo "Live: routed to $HOSTS."
   else

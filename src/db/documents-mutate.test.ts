@@ -4,8 +4,9 @@ import { createTestDb } from "./test-db";
 /**
  * mutateBy on DOCUMENT collections, against real (in-process) Postgres.
  *
- * Seat counts (`tripOverrides`) and every managed trip (`trips`) are
- * documents, and both are written through mutateBy. These assert the two
+ * Seat counts (`tripOverrides`) are documents written through mutateBy.
+ * (Managed trips were too, until they moved to their own table on
+ * 2026-11-03: src/db/trips-table.test.ts.) These assert the two
  * things that must hold for that to be safe:
  *
  *   1. the row is found by its key (documents have no `slug` column — the key
@@ -56,19 +57,19 @@ describe("mutateBy on a document collection", () => {
   });
 
   it("inserts when there is no document yet, with the key set", async () => {
-    await repo.mutateBy("trips", "slug", "new-trip", async (row) => {
+    await repo.mutateBy("tripOverrides", "slug", "new-trip", async (row) => {
       expect(row).toBeNull();
-      return { kind: "group", status: "draft" };
+      return { title: "New trip", published: false };
     });
 
-    await repo.mutateBy("trips", "slug", "new-trip", async (row) => {
-      expect(row?.status).toBe("draft"); // found by key on the second call
-      return { status: "published" };
+    await repo.mutateBy("tripOverrides", "slug", "new-trip", async (row) => {
+      expect(row?.published).toBe(false); // found by key on the second call
+      return { published: true };
     });
 
-    const rows = (await repo.listRecords("trips")) ?? [];
+    const rows = (await repo.listRecords("tripOverrides")) ?? [];
     expect(rows).toHaveLength(1);
-    expect(rows[0]).toMatchObject({ slug: "new-trip", kind: "group", status: "published" });
+    expect(rows[0]).toMatchObject({ slug: "new-trip", title: "New trip", published: true });
   });
 
   it("writes nothing when the mutation declines", async () => {

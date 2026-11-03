@@ -69,6 +69,11 @@ const Priced = z.object({
   detail: z.string().trim().max(160).default(""),
   delta: z.number().int().min(0).max(1_000_000),
 });
+// A joining point can cost LESS than the default: "land only, arrange your own
+// flights" is -₹28,000 on Vietnam. The schema refused it, so four coded trips
+// could not be opened in the editor or moved into the database (found
+// 2026-11-03). Room sharing only ever adds.
+const Pickup = Priced.extend({ delta: z.number().int().min(-1_000_000).max(1_000_000) });
 
 export const TripContentSchema = z.object({
   title: z.string().trim().min(3, "Give the trip a title.").max(120),
@@ -90,7 +95,7 @@ export const TripContentSchema = z.object({
   ageGroup: z.string().trim().max(40).default(""),
   advanceAmount: z.number().int().min(0).max(1_000_000).default(ADVANCE_DEFAULT),
   sharing: z.array(Priced).max(6).default(SHARING_STANDARD),
-  pickups: z.array(Priced).max(12).default([]),
+  pickups: z.array(Pickup).max(12).default([]),
 
   // Customized trips
   fromPrice: z.number().int().min(0).max(10_000_000).default(0),

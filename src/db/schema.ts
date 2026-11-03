@@ -806,6 +806,92 @@ export const notifications = pgTable(
 );
 
 // ---------------------------------------------------------------------------
+// Trips (docs/design/ai-cofounder.md §6a, phase 1d)
+// ---------------------------------------------------------------------------
+
+/**
+ * Every trip on the site and in the sales library, group and customized.
+ *
+ * The itinerary is ONE validated jsonb (`live`, and `draft` while edits are
+ * pending), shaped by TripContentSchema in lib/trip-model.js, because nothing
+ * queries across days and the editor and the agent change it as a whole.
+ * What IS queried is lifted out by Postgres into generated columns, so
+ * "Kerala trips under ₹40,000 that are live" is one indexed query and can
+ * never disagree with the content it came from.
+ *
+ * Moved here from `documents` (and from code, for the 34 original trips) on
+ * 2026-11-03. The lifecycle (draft → publish → versions → archive) is
+ * unchanged: lib/cms/trips.js.
+ */
+export const trips = pgTable(
+  "trips",
+  {
+    id: id(),
+    slug: text("slug").notNull(),
+    kind: text("kind").notNull(), // group | customized
+    status: text("status").notNull().default("draft"), // draft | internal | published | archived
+    live: jsonb("live"),
+    draft: jsonb("draft"),
+    version: integer("version").notNull().default(0),
+    // manual | code | duplicate | quotation | planner
+    source: text("source").notNull().default("manual"),
+    sourceRef: text("source_ref"),
+    redirectTo: text("redirect_to"),
+    publishedAt: timestamp("published_at", { withTimezone: true }),
+    publishedByName: text("published_by_name"),
+    archivedAt: timestamp("archived_at", { withTimezone: true }),
+    createdByName: text("created_by_name"),
+    updatedById: text("updated_by_id"),
+    updatedByName: text("updated_by_name"),
+
+    // Read from what is live, by Postgres. Never written by the app.
+    title: text("title").generatedAlwaysAs(sql`(live ->> 'title')`),
+    destination: text("destination").generatedAlwaysAs(sql`(live ->> 'destination')`),
+    region: text("region").generatedAlwaysAs(sql`(live ->> 'region')`),
+    theme: text("theme").generatedAlwaysAs(sql`(live ->> 'theme')`),
+    // "6N / 7D" → 6. Null for a range like "5–7 days".
+    nights: integer("nights").generatedAlwaysAs(sql`(nullif(substring(live ->> 'duration' from '(\\d+)\\s*N'), '')::integer)`),
+    // Customized trips only; group prices live on their departures.
+    fromPricePaise: bigint("from_price_paise", { mode: "bigint" }).generatedAlwaysAs(
+      sql`(nullif((live ->> 'fromPrice'), '')::bigint * 100)`
+    ),
+    ...timestamps,
+  },
+  (t) => [
+    uniqueIndex("trips_slug_unique").on(t.slug),
+    index("trips_status_idx").on(t.kind, t.status),
+    index("trips_destination_idx").on(t.destination),
+    check("trips_kind", sql`${t.kind} in ('group', 'customized')`),
+    check("trips_status", sql`${t.status} in ('draft', 'internal', 'published', 'archived')`),
+    check("trips_version_not_negative", sql`${t.version} >= 0`),
+    // On the site or in the library means there is something to show.
+    check("trips_live_when_visible", sql`${t.status} not in ('internal', 'published') or ${t.live} is not null`),
+  ]
+);
+
+/** One immutable snapshot per publish, so a booking can show what it was sold on. */
+export const tripVersions = pgTable(
+  "trip_versions",
+  {
+    id: id(),
+    // `${slug}@${version}`
+    key: text("key").notNull(),
+    tripSlug: text("trip_slug").notNull(),
+    kind: text("kind").notNull(),
+    version: integer("version").notNull(),
+    status: text("status").notNull(),
+    content: jsonb("content").notNull(),
+    publishedAt: timestamp("published_at", { withTimezone: true }),
+    publishedByName: text("published_by_name"),
+    ...timestamps,
+  },
+  (t) => [
+    uniqueIndex("trip_versions_key_unique").on(t.key),
+    index("trip_versions_trip_idx").on(t.tripSlug, t.version),
+  ]
+);
+
+// ---------------------------------------------------------------------------
 // Hotels and their rate cards (docs/design/ai-cofounder.md §2, phase 1c)
 // ---------------------------------------------------------------------------
 

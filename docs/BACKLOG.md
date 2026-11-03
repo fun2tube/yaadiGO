@@ -301,6 +301,9 @@ Code items #154–#168 were fixed 2026-10-14 and moved to Done. What is left nee
 | 200 | Fill the quotation's "Where you stay" block from its hotel lines (directory hotels carry name, town, nights, room type) so the two can't disagree (review 2026-11-02-hotels, F2) | S3 | DevOps | Adding a directory hotel adds it to Where you stay |
 | 201 | Database-level no-overlap for hotel rates: `btree_gist` exclusion constraint on (hotel, room type, meal plan, daterange) (F3) | S3 | DevOps | Two overlapping inserts in one second: one refused by Postgres |
 | 202 | Use extra-bed / child prices in the quote hotel picker (F5) | S4 | DevOps | A family of 3 in one room prices the extra bed |
+| 203 | Destinations as a real entity (Kashmir, Spiti…): table, place pages, SEO fields; link trips and hotels to it (review 2026-11-03-trips-table, F4) | S3 | CTO + DevOps | /destinations/kashmir lists its trips and hotels from the database |
+| 204 | Retire the code catalogue (lib/tours.js, lib/packages.js) as a render fallback once the live import has held for a month (F5) | S3 | DevOps | No page reads trip content from code |
+| 205 | Group departures onto the `departures` table instead of code + tripOverrides (F6) | S3 | DevOps | Seats move only through the departures table |
 | 191 | Get the logo as a vector (SVG/AI/PDF) or a ≥2000 px PNG from its designer. The supplied file is 400×400 and slightly JPEG-soft: fine on screen, not for banners or print (review 2026-11-02-brand-logo, F2) | S3 | You | `public/brand/` regenerated from the original |
 
 ## Done

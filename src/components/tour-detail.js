@@ -8,8 +8,12 @@ import { quickEnquiryHref, whatsappLink } from "@/lib/site";
 import Link from "next/link";
 import { CalendarIcon, UsersIcon, CheckIcon, AlertIcon, ChevronIcon, WhatsAppIcon } from "./icons";
 
-function ItineraryDay({ day }) {
-  const [open, setOpen] = useState(day.day === 1);
+// The first day starts open. By position, not by `day.day === 1`: trips edited
+// in the admin store day numbers as text ("1", or "1–2"), so that check left
+// every managed trip's itinerary fully closed (found 2026-11-03 comparing pages
+// before and after moving the coded trips into the database).
+function ItineraryDay({ day, first = false }) {
+  const [open, setOpen] = useState(first);
   return (
     <div className="border-b border-paper-line py-4">
       <button
@@ -86,8 +90,8 @@ export default function TourDetail({ tour, related }) {
               Day-by-day itinerary
             </h2>
             <div className="mt-3">
-              {tour.itinerary.map((day) => (
-                <ItineraryDay key={day.day} day={day} />
+              {tour.itinerary.map((day, index) => (
+                <ItineraryDay key={day.day} day={day} first={index === 0} />
               ))}
             </div>
           </section>

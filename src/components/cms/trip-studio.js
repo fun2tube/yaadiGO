@@ -129,12 +129,13 @@ function OverviewTab({ kind, c, set, disabled }) {
           />
           <PricedList
             title="Joining points"
-            hint="Where travellers can join, and what it adds per person."
+            hint="Where travellers can join, and what it adds per person. Use a minus for a saving, e.g. -28000 for land only."
             items={c.pickups}
             nameKey="city"
             namePlaceholder="Delhi"
             onChange={(pickups) => set({ pickups })}
             disabled={disabled}
+            allowDiscount
           />
         </Section>
       ) : (
@@ -162,7 +163,7 @@ function OverviewTab({ kind, c, set, disabled }) {
   );
 }
 
-function PricedList({ title, hint, items, nameKey, namePlaceholder, onChange, disabled }) {
+function PricedList({ title, hint, items, nameKey, namePlaceholder, onChange, disabled, allowDiscount = false }) {
   const patch = (i, p) => onChange(items.map((it, j) => (j === i ? { ...it, ...p } : it)));
   return (
     <div>
@@ -183,7 +184,7 @@ function PricedList({ title, hint, items, nameKey, namePlaceholder, onChange, di
           <div key={it.id} className="grid grid-cols-[1fr_1fr_90px_auto] items-center gap-2">
             <input aria-label="Name" placeholder={namePlaceholder} className={input} disabled={disabled} value={it[nameKey] ?? ""} onChange={(e) => patch(i, { [nameKey]: e.target.value })} />
             <input aria-label="Detail" placeholder="Short detail" className={input} disabled={disabled} value={it.detail ?? ""} onChange={(e) => patch(i, { detail: e.target.value })} />
-            <input aria-label="Adds (₹)" type="number" inputMode="numeric" min={0} className={input} disabled={disabled} value={it.delta} onChange={(e) => patch(i, { delta: Number(e.target.value) || 0 })} />
+            <input aria-label={allowDiscount ? "Adds or saves (₹)" : "Adds (₹)"} type="number" inputMode="numeric" min={allowDiscount ? undefined : 0} className={input} disabled={disabled} value={it.delta} onChange={(e) => patch(i, { delta: Number(e.target.value) || 0 })} />
             <button type="button" disabled={disabled} aria-label="Remove" className={smallButton} onClick={() => onChange(items.filter((_, j) => j !== i))}>
               ✕
             </button>
